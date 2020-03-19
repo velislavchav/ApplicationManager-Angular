@@ -1,0 +1,155 @@
+<div class="container-fluid py-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form (ngSubmit)="createJob()" [formGroup]="createJobForm">
+                <div class="card card-body bg-light">
+                    <h3 class="text-center mb-4">Create job offer</h3>
+                    <fieldset>
+                        <div class="form-group has-error">
+                            <input class="form-control input-lg" placeholder="Title" formControlName="title"
+                                type="text">
+                        </div>
+                        <div class="form-group has-error">
+                            <input class="form-control input-lg" placeholder="Salary" formControlName="salary"
+                                type="number">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control input-lg" formControlName="degree">
+                                <option disabled>Needed education degree</option>
+                                <option value="associate"> Associate's degree </option>
+                                <option value="bachelor"> Bachelor's degree </option>
+                                <option value="master"> Master's degree </option>
+                                <option value="doctoral"> Doctoral degree </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control input-lg" formControlName="englishLevel">
+                                <option disabled>English level</option>
+                                <option value="a1">A1</option>
+                                <option value="a2">A2</option>
+                                <option value="b1">B1</option>
+                                <option value="b2">B2</option>
+                                <option value="c1">C1</option>
+                                <option value="c2">C2</option>
+                            </select>
+                        </div>
+                        <!-- Checkboxes -->
+                        <h6 class="text-center"> Required technical skills </h6>
+                        <div class="row text-center py-2">
+                            <!-- Col 1 -->
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="js" id="jsDev">
+                                    <label class="form-check-label" for="jsDev">
+                                        JavaScript
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="c" id="cDev">
+                                    <label class="form-check-label" for="cDev">
+                                        C
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="java" id="javaDev">
+                                    <label class="form-check-label" for="javaDev">
+                                        Java
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="python" id="pythonDev">
+                                    <label class="form-check-label" for="pythonDev">
+                                        Python
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="php" id="phpDev">
+                                    <label class="form-check-label" for="phpDev">
+                                        PHP
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Col 2 -->
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="wordpress" id="wordpressDev">
+                                    <label class="form-check-label" for="wordpressDev">
+                                        Wordpress
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="mySql" id="mySqlDev">
+                                    <label class="form-check-label" for="mySqlDev">
+                                        MySQL
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="mongoDb" id="mongoDbDev">
+                                    <label class="form-check-label" for="mongoDbDev">
+                                        MongoDB
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="expressJs" id="expressJsDev">
+                                    <label class="form-check-label" for="expressJsDev">
+                                        ExpressJS
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="firebase" id="firebaseDev">
+                                    <label class="form-check-label" for="firebaseDev">
+                                        Firebase
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Col 3 -->
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="reactJs" id="reactJsDev">
+                                    <label class="form-check-label" for="reactJsDev">
+                                        ReactJS
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="angular" id="angularDev">
+                                    <label class="form-check-label" for="angularDev">
+                                        Angular
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="vue" id="vueDev">
+                                    <label class="form-check-label" for="vueDev">
+                                        Vue
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="nodeJs" id="nodeJsDev">
+                                    <label class="form-check-label" for="nodeJsDev">
+                                        NodeJS
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="reactNative" id="reactNativeDev">
+                                    <label class="form-check-label" for="reactNativeDev">
+                                        React Native
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Checkboxes -->
+                        <div class="form-group mt-2">
+                            <h6 class="text-center"> Advantages (if there any) </h6>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group mt-2">
+                            <h6 class="text-center"> Advantages (if there any) </h6>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="createJobForm.invalid"> Create job </button>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
