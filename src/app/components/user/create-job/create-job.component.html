@@ -1,17 +1,28 @@
 <div class="container-fluid py-5">
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <form (ngSubmit)="createJob()" [formGroup]="createJobForm">
+            <form (ngSubmit)="submitJob()" [formGroup]="createJobForm">
                 <div class="card card-body bg-light">
                     <h3 class="text-center mb-4">Create job offer</h3>
                     <fieldset>
                         <div class="form-group has-error">
-                            <input class="form-control input-lg" placeholder="Title" formControlName="title"
+                            <input class="form-control input-lg" placeholder="Job position" formControlName="jobPosition"
                                 type="text">
                         </div>
                         <div class="form-group has-error">
                             <input class="form-control input-lg" placeholder="Salary" formControlName="salary"
                                 type="number">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control input-lg" formControlName="jobCategory">
+                                <option disabled> Job category </option>
+                                <option value="web developer"> Web developer </option>
+                                <option value="backend"> Backend developer </option>
+                                <option value="database"> Database developer </option>
+                                <option value="system administrator"> System administrator </option>
+                                <option value="technical support"> Technical Support </option>
+                                <option value="QA"> Quality assurance </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <select class="form-control input-lg" formControlName="degree">
@@ -39,31 +50,31 @@
                             <!-- Col 1 -->
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="js" id="jsDev">
+                                    <input class="form-check-input" type="checkbox" value="javascript" id="jsDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="jsDev">
                                         JavaScript
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="c" id="cDev">
+                                    <input class="form-check-input" type="checkbox" value="c" id="cDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="cDev">
                                         C
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="java" id="javaDev">
+                                    <input class="form-check-input" type="checkbox" value="java" id="javaDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="javaDev">
                                         Java
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="python" id="pythonDev">
+                                    <input class="form-check-input" type="checkbox" value="python" id="pythonDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="pythonDev">
                                         Python
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="php" id="phpDev">
+                                    <input class="form-check-input" type="checkbox" value="php" id="phpDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="phpDev">
                                         PHP
                                     </label>
@@ -72,31 +83,31 @@
                             <!-- Col 2 -->
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="wordpress" id="wordpressDev">
+                                    <input class="form-check-input" type="checkbox" value="wordpress" id="wordpressDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="wordpressDev">
                                         Wordpress
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="mySql" id="mySqlDev">
+                                    <input class="form-check-input" type="checkbox" value="mySql" id="mySqlDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="mySqlDev">
                                         MySQL
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="mongoDb" id="mongoDbDev">
+                                    <input class="form-check-input" type="checkbox" value="mongoDb" id="mongoDbDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="mongoDbDev">
                                         MongoDB
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="expressJs" id="expressJsDev">
+                                    <input class="form-check-input" type="checkbox" value="expressJs" id="expressJsDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="expressJsDev">
                                         ExpressJS
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="firebase" id="firebaseDev">
+                                    <input class="form-check-input" type="checkbox" value="firebase" id="firebaseDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="firebaseDev">
                                         Firebase
                                     </label>
@@ -105,31 +116,31 @@
                             <!-- Col 3 -->
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="reactJs" id="reactJsDev">
+                                    <input class="form-check-input" type="checkbox" value="reactJs" id="reactJsDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="reactJsDev">
                                         ReactJS
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="angular" id="angularDev">
+                                    <input class="form-check-input" type="checkbox" value="angular" id="angularDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="angularDev">
                                         Angular
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="vue" id="vueDev">
+                                    <input class="form-check-input" type="checkbox" value="vue" id="vueDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="vueDev">
                                         Vue
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="nodeJs" id="nodeJsDev">
+                                    <input class="form-check-input" type="checkbox" value="nodeJs" id="nodeJsDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="nodeJsDev">
                                         NodeJS
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="reactNative" id="reactNativeDev">
+                                    <input class="form-check-input" type="checkbox" value="reactNative" id="reactNativeDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="reactNativeDev">
                                         React Native
                                     </label>
@@ -139,13 +150,8 @@
                         <!-- /Checkboxes -->
                         <div class="form-group mt-2">
                             <h6 class="text-center"> Advantages (if there any) </h6>
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea class="form-control" rows="3" formControlName="advantages"></textarea>
                         </div>
-                        <div class="form-group mt-2">
-                            <h6 class="text-center"> Advantages (if there any) </h6>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-
                         <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="createJobForm.invalid"> Create job </button>
                     </fieldset>
                 </div>

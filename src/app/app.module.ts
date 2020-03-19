@@ -27,6 +27,7 @@ import { CreateApplicationComponent } from './components/user/create-application
 import { CreateJobComponent } from './components/user/create-job/create-job.component';
 import { JobsSectionComponent } from './components/jobs/jobs-section/jobs-section.component';
 import { JobCardComponent } from './components/jobs/job-card/job-card.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [

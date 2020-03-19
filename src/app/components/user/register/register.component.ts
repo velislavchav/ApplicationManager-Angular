@@ -23,7 +23,7 @@ export class RegisterComponent {
         password: ['', [Validators.required, Validators.minLength(4)]],
         repeatPassword: ['', [Validators.required, Validators.minLength(4)]],
       }, { validators: [passwordsMatch] }),
-      gender: ['Not selected', [Validators.required]],
+      gender: ['Gender', [Validators.required]],
       phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       profilePicture: [''],
     })
