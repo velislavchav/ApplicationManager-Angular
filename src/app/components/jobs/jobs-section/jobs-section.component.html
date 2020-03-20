@@ -20,9 +20,8 @@
         <td> {{ job.authorName }} </td>
         <td>
           <button type="button" class="btn btn-success mr-2"> Apply for this job </button>
-          <button type="button" class="btn btn-warning ml-2"> See more info </button>
+          <button type="button" class="btn btn-warning ml-2" routerLink="/jobs/details/{{job.id}}"> See more info </button>
         </td>
-
       </tr>
     </tbody>
   </table>

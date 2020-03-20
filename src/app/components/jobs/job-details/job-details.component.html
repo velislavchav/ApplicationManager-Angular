@@ -1,0 +1,69 @@
+<div class="card text-center mt-5" *ngIf="currentJob">
+  <div class="card-header text-capitalize font-weight-bold">
+    Job details
+  </div>
+  <div class="card-body">
+    <p class="card-text" *ngIf="currentJob.advantages"> {{ currentJob.advantages }} </p>
+    <div class="row border-top border-bottom">
+      <!-- col 1 -->
+      <div class="col-md-7 pt-4">
+        <h4 class="font-weight-light font-weight-bold"> {{ currentJob.jobPosition }} </h4>
+        <!-- Description -->
+        <div class="jobDescr mt-4">
+          <h6> Description </h6>
+          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quia sapiente at commodi soluta, omnis ipsa
+            aliquid dolore placeat debitis similique earum expedita facilis, magnam doloremque incidunt nemo enim
+            excepturi! </p>
+        </div>
+        <!-- Degree -->
+        <div class="tableReq mt-4">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" colspan="2" class="text-uppercase"> More information </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-capitalize">
+                <th scope="row"> Job category </th>
+                <td> {{ currentJob.jobCategory }} </td>
+              </tr>
+              <tr class="text-capitalize">
+                <th scope="row"> Required degree </th>
+                <td> {{ currentJob.degree }} </td>
+              </tr>
+              <tr class="text-capitalize">
+                <th scope="row"> Required english level </th>
+                <td> {{ currentJob.englishLevel }} </td>
+              </tr>
+              <tr>
+                <th scope="row"> Salary </th>
+                <td> {{ currentJob.salary }} euro </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /col 1 -->
+      <!-- col 2 -->
+      <div class="col-md-5 text-center py-4">
+        <!-- Required skills -->
+        <h6> Required skills: </h6>
+        <span *ngFor="let requirment of currentJob.requiredSkills" class="text-muted text-capitalize"> {{ requirment }}
+          <br></span>
+        <div class="mt-4">
+          <small class="text-secondary border-top "> created by {{ currentJob.authorName }} <br> </small>
+        </div>
+        <!-- Advantages -->
+        <div class="jobAdvant mt-4">
+          <h6> Advantages </h6>
+          <p> {{ currentJob.advantages }} </p>
+        </div>
+      </div>
+      <!-- /col 2 -->
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    <button routerLink="/jobs" class="btn btn-primary col-sm-4"> Back </button>
+  </div>
+</div>

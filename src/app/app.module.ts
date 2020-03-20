@@ -4,8 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 // core components
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { HomeComponent } from './components/home/home.component';
+import { NavigationComponent } from './components/core/navigation/navigation.component';
+import { HomeComponent } from './components/core/home/home.component';
+// import { LoaderComponent } from './components/core/loader/loader.component';
 
 // firebase
 import { environment } from "src/environments/environment";
@@ -16,7 +17,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 // toastr
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './components/core/not-found/not-found.component';
 
 //forms
 import { ApplicationsSectionComponent } from './components/applications/applications-section/applications-section.component';
@@ -31,6 +32,7 @@ import { JobsModule } from './components/jobs/jobs.module';
     AppComponent,
     NavigationComponent,
     HomeComponent,
+    // LoaderComponent,
     NotFoundComponent,
     ApplicationsSectionComponent,
     ApplicationCardComponent,

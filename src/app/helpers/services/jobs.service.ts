@@ -11,18 +11,18 @@ import { map } from 'rxjs/operators';
 })
 export class JobsService {
   jobsCollection: AngularFirestoreCollection<IJob>;
-  constructor(private firestore: AngularFirestore, private toastr: ToastrService, private userService: UserService, private router: Router) { 
+  constructor(private firestore: AngularFirestore, private toastr: ToastrService, private userService: UserService, private router: Router) {
     this.jobsCollection = this.firestore.collection('jobs');
   }
 
   createJob(allSkills: {}, jobPosition: string, salary: number, jobCategory: string, degree: string, englishLevel: string, advantages: string, authorId: string, authorName: string) {
     let requiredSkills: Array<string> = [];
     for (const selectedSkill in allSkills) {
-      if(allSkills[selectedSkill]) {
+      if (allSkills[selectedSkill]) {
         requiredSkills.push(selectedSkill);
       }
     } // filtering all skills to only required
-    
+
     const newJob = {
       requiredSkills,
       jobPosition,
@@ -34,7 +34,7 @@ export class JobsService {
       authorId,
       authorName,
     }
-    
+
     this.jobsCollection.add(newJob).then(() => {
       this.toastr.success("Successfully created job!", "Success");
       this.router.navigate(['/jobs']);
@@ -53,5 +53,12 @@ export class JobsService {
         })
       }),
     )
+  }
+
+  loadJobDetails(jobId: string) {
+    return this.firestore.collection('jobs').doc(jobId).ref.get()
+      .then(doc => {
+        return doc.data() as IJob;
+      });
   }
 }
