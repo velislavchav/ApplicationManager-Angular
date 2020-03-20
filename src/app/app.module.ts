@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+
+// core components
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HomeComponent } from './components/home/home.component';
-import { RegisterComponent } from './components/user/register/register.component';
-import { LoginComponent } from './components/user/login/login.component';
 
 // firebase
 import { environment } from "src/environments/environment";
@@ -20,39 +19,36 @@ import { ToastrModule } from 'ngx-toastr';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 //forms
-import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationsSectionComponent } from './components/applications/applications-section/applications-section.component';
 import { ApplicationCardComponent } from './components/applications/application-card/application-card.component';
-import { CreateApplicationComponent } from './components/user/create-application/create-application.component';
-import { CreateJobComponent } from './components/user/create-job/create-job.component';
-import { JobsSectionComponent } from './components/jobs/jobs-section/jobs-section.component';
-import { JobCardComponent } from './components/jobs/job-card/job-card.component';
-import { CommonModule } from '@angular/common';
+
+// custom modules
+import { UserModule } from './components/user/user.module';
+import { JobsModule } from './components/jobs/jobs.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     HomeComponent,
-    RegisterComponent,
-    LoginComponent,
     NotFoundComponent,
     ApplicationsSectionComponent,
     ApplicationCardComponent,
-    CreateApplicationComponent,
-    CreateJobComponent,
-    JobsSectionComponent,
-    JobCardComponent
   ],
   imports: [
     BrowserModule,
+    UserModule,
+    JobsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase), //firestore
     AngularFirestoreModule, //firestore
     AngularFireAuthModule, //firestore
     BrowserAnimationsModule, // toastr
-    ToastrModule.forRoot(), // toastr
-    ReactiveFormsModule, // forms
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      preventDuplicates: true,
+      progressBar: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

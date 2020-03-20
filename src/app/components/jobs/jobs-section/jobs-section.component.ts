@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { JobsService } from 'src/app/services/jobs.service';
-import { IJob } from 'src/app/interfaces/IJob';
+import { JobsService } from 'src/app/helpers/services/jobs.service';
+import { IJob } from 'src/app/helpers/interfaces/IJob';
 import { Subscription } from 'rxjs';
 
 @Component({

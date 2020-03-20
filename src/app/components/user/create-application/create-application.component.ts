@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/helpers/services/user.service';
 
 @Component({
   selector: 'app-create-application',
@@ -15,10 +15,8 @@ export class CreateApplicationComponent {
     this.createApplicationForm = fb.group({
       title: ['', [Validators.required, Validators.minLength(4)]],
       // age: ['', [Validators.required, Validators.pattern(this.emailRegexPattern)]],
-      
       wayOfCommunication: ['Prefered way of communication', [Validators.required]],
-      englishLevel: ['English level', [Validators.required]],
-      
+      englishLevel: ['English level', [Validators.required]], 
     })
   }
 

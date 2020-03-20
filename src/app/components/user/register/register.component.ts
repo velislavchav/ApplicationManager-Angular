@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/helpers/services/user.service';
 
 function passwordsMatch(c: AbstractControl) {
   return c.value.password === c.value.repeatPassword ? null : { passwordsMatch: true }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
-import { JobsService } from 'src/app/services/jobs.service';
+import { UserService } from 'src/app/helpers/services/user.service';
+import { JobsService } from 'src/app/helpers/services/jobs.service';
 import { Subscription } from 'rxjs';
 
 @Component({
