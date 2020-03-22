@@ -11,28 +11,28 @@
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li> -->
         <li class="nav-item">
-            <a class="nav-link" routerLink="user/profile"> Profile </a>
+            <a class="nav-link" routerLink="/applications" *ngIf="isAuth"> Applications </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="/jobs"> Available jobs </a>
+            <a class="nav-link" routerLink="/jobs" *ngIf="isAuth"> Available jobs </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/applications"> Applications </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="user/create/application"> Create application </a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuth">
             <a class="nav-link" routerLink="user/create/job"> Create job </a>
         </li>
         <!-- <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
         </li>  -->
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuth">
+            <a class="nav-link" routerLink="user/profile"> Profile </a>
+        </li>
+        <li class="nav-item" *ngIf="!isAuth">
             <a class="nav-link" routerLink="/user/register">Register</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isAuth">
             <a class="nav-link" routerLink="/user/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuth">
+            <a class="nav-link" (click)="logout()"> Logout </a>
         </li>
         <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown" aria-haspopup="true"

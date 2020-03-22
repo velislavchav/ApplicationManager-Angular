@@ -48,6 +48,7 @@ import { JobsModule } from './components/jobs/jobs.module';
     BrowserAnimationsModule, // toastr
     ToastrModule.forRoot({
       timeOut: 4000,
+      positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true,
     }),

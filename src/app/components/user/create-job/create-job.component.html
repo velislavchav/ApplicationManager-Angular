@@ -36,12 +36,12 @@
                         <div class="form-group">
                             <select class="form-control input-lg" formControlName="englishLevel">
                                 <option disabled>English level</option>
-                                <option value="a1">A1</option>
-                                <option value="a2">A2</option>
-                                <option value="b1">B1</option>
-                                <option value="b2">B2</option>
-                                <option value="c1">C1</option>
-                                <option value="c2">C2</option>
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="C1">C1</option>
+                                <option value="C2">C2</option>
                             </select>
                         </div>
                         <!-- Checkboxes -->
@@ -53,12 +53,6 @@
                                     <input class="form-check-input" type="checkbox" value="javascript" id="jsDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="jsDev">
                                         JavaScript
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="c" id="cDev" (change)="getRequiredTechSkill($event)">
-                                    <label class="form-check-label" for="cDev">
-                                        C
                                     </label>
                                 </div>
                                 <div class="form-check">
@@ -77,6 +71,13 @@
                                     <input class="form-check-input" type="checkbox" value="php" id="phpDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="phpDev">
                                         PHP
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="autoCAD" id="autoCad"
+                                        (change)="getRequiredTechSkill($event)">
+                                    <label class="form-check-label" for="autoCad">
+                                        AutoCAD
                                     </label>
                                 </div>
                             </div>
@@ -107,11 +108,19 @@
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="firebase" id="firebaseDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="c#" id="cDev" (change)="getRequiredTechSkill($event)">
+                                    <label class="form-check-label" for="cDev">
+                                        C#
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="firebase" id="firebaseDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="firebaseDev">
                                         Firebase
                                     </label>
                                 </div>
+                                
                             </div>
                             <!-- Col 3 -->
                             <div class="col-md-4">

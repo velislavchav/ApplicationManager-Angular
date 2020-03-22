@@ -14,7 +14,7 @@ export class CreateJobComponent implements OnDestroy {
   subscriber: Subscription;
   selectedRequiredTechSkill: {} = {
     javascript: false,
-    c: false,
+    cSharp: false,
     java: false,
     python: false,
     php: false,
@@ -22,12 +22,13 @@ export class CreateJobComponent implements OnDestroy {
     mySql: false,
     mongoDb: false,
     expressJs: false,
-    firebase: false,
     reactJs: false,
     angular: false,
     vue: false,
     nodeJs: false,
     reactNative: false,
+    autoCAD: false,
+    firebase: false,
   };
   
   constructor(private fb: FormBuilder, private userService: UserService, private jobsService: JobsService) {

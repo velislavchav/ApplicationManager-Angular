@@ -3,7 +3,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CreateJobComponent } from './create-job/create-job.component';
-import { CreateApplicationComponent } from './create-application/create-application.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { UserDataResolver } from 'src/app/helpers/resolvers/user-data.service';
 
 const userRoutes: Routes = [
     {
@@ -19,7 +20,17 @@ const userRoutes: Routes = [
             },
             {
                 path: 'profile',
-                component: ProfileComponent,
+                children: [
+                    {
+                        path: '',
+                        component: ProfileComponent,
+                    },
+                    {
+                        path: 'edit-profile',
+                        component: EditProfileComponent,
+                        resolve: { userInfo: UserDataResolver }
+                    },
+                ]
             },
             {
                 path: 'create',
@@ -28,10 +39,6 @@ const userRoutes: Routes = [
                         path: 'job',
                         component: CreateJobComponent,
                     },
-                    {
-                        path: 'application',
-                        component: CreateApplicationComponent,
-                    }
                 ]
             }
         ]

@@ -31,11 +31,11 @@ export class UserService {
     });
   }
 
-  signUp(username: string, email: string, password: string, gender: string, phone: string, profilePicture: string, role: string) {
+  signUp(username: string, email: string, password: string) {
     this.dbAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        this.pushUserData({ username, email, gender, phone, profilePicture, role });
+        this.pushUserDataAfterRegister({ username, email });
         this.toastr.success("Successfully registered!", "Success");
         this.router.navigate(["/user/login"]);
       })
@@ -58,7 +58,7 @@ export class UserService {
       });
   }
 
-  pushUserData(user: { uid?: string, username: string, email: string, gender: string, phone: string, profilePicture: string, role: string }) {
+  pushUserDataAfterRegister(user: { uid?: string, username: string, email: string }) {
     user.uid = this.getUserId();
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<IUser> = this.firestore.doc(`users/${user.uid}`);
@@ -66,12 +66,52 @@ export class UserService {
       uid: user.uid,
       username: user.username,
       email: user.email,
-      gender: user.gender,
-      phone: user.phone,
-      profilePicture: user.profilePicture,
-      role: user.role,
+      profilePicture: 'https://i.ytimg.com/vi/eDBDthVSiS8/maxresdefault.jpg',
+      role: 'user',
+      gender: 'Choose gender',
+      phone: '',
+      availability: 'Choose availability',
+      profession: 'Select profession',
+      experience: 'Select experience',
+      preferedWayOfCommunication: 'Prefered way of communication',
+      englishLevel: 'English level',
+      totalProjects: 0,
+      projectsLink: '',
+      moreInfo: '',
+      techSkills: {
+        javascript: false,
+        cSharp: false,
+        java: false,
+        python: false,
+        php: false,
+        wordpress: false,
+        mySql: false,
+        mongoDb: false,
+        expressJs: false,
+        reactJs: false,
+        angular: false,
+        vue: false,
+        nodeJs: false,
+        reactNative: false,
+        autoCAD: false,
+        firebase: false,
+      },
+      applications: [],
     };
-    return userRef.set(data);
+    userRef.set(data);
+  }
+
+  updateUserData(newDataForUser) {
+    newDataForUser.uid = this.getUserId();
+    const userRef: AngularFirestoreDocument<IUser> = this.firestore.doc(`users/${newDataForUser.uid}`);
+    userRef.set(newDataForUser).then(() => {
+      this.toastr.success("Successfully edited profile!", "Success");
+      this.router.navigate(["/user/profile"]);
+    }).catch(err => {
+      this.toastr.error(err, "Error");
+      this.router.navigate(["/home"]);
+    });
+    
   }
 
   getUser(id: string): Observable<IUser> {
@@ -84,18 +124,17 @@ export class UserService {
         }))
   }
 
-  // logout() {
-  //   this.dbAuth.auth.signOut()
-  //     .then(() => {
-  //       localStorage.clear();
-  //       this.router.navigate(["/home"]);
-  //       // this.toastr.success("Successfully logged out!", "Success");
-  //       location.reload();
-  //     })
-  //     .catch(err => {
-  //       // this.toastr.error(err, "Error");
-  //     });
-  // }
+  logout() {
+    return this.dbAuth.auth.signOut()
+      .then(() => {
+        localStorage.clear();
+        this.router.navigate(["/home"]);
+        this.toastr.success("Successfully logged out!", "Success");
+      })
+      .catch(err => {
+        this.toastr.error(err, "Error");
+      });
+  }
 
   getUserId() {
     if (this.dbAuth.auth.currentUser) {

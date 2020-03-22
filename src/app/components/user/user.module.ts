@@ -4,12 +4,12 @@ import { CreateJobComponent } from './create-job/create-job.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
-import { CreateApplicationComponent } from './create-application/create-application.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
-  declarations: [CreateApplicationComponent, CreateJobComponent, LoginComponent, ProfileComponent, RegisterComponent],
+  declarations: [CreateJobComponent, LoginComponent, ProfileComponent, RegisterComponent, EditProfileComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

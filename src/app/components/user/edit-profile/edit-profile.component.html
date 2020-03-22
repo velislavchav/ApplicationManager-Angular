@@ -1,0 +1,242 @@
+<div class="container-fluid py-5 bg-light">
+    <form (ngSubmit)="submitEditProfile()" [formGroup]="editProfileForm">
+        <div class="row">
+            <h3 class="col-md-12 text-center"> Edit profile </h3>
+            <!-- Col 1 -->
+            <div class="col-md-4 mx-auto card-body">
+                <fieldset>
+                    <!-- Gender -->
+                    <div class="form-group">
+                        <select class="form-control input-lg" formControlName="gender">
+                            <option disabled>Choose gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <!-- Profession -->
+                    <div class="form-group">
+                        <select class="form-control input-lg" formControlName="profession">
+                            <option disabled> Select profession </option>
+                            <option value="student"> Student </option>
+                            <option value="web developer"> Web developer </option>
+                            <option value="free lancer"> Free lancer </option>
+                            <option value="backend developer"> Back-end developer </option>
+                            <option value="frontend developer"> Front-end developer </option>
+                            <option value="fullstack developer"> Full-stack developer </option>
+                            <option value="database developer"> Database developer </option>
+                            <option value="system administrator"> System administrator </option>
+                            <option value="technical support"> Technical support </option>
+                            <option value="data analyst"> Data Analyst </option>
+                            <option value="data engineer"> Data Engineer </option>
+                            <option value="data scientist"> Data Scientist </option>
+                            <option value="network engineer"> Network Engineer</option>
+                            <option value="email marketing coordinator"> Email Marketing Coordinator </option>
+                        </select>
+                    </div>
+                    <!-- Experience -->
+                    <div class="form-group">
+                        <select class="form-control input-lg" formControlName="experience">
+                            <option disabled> Select experience </option>
+                            <option value="none"> None </option>
+                            <option value="medium"> Medium </option>
+                            <option value="expert"> Expert </option>
+                            <option value="master"> Master </option>
+                        </select>
+                    </div>
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <input class="form-control input-lg" placeholder="Phone" formControlName="phone" type="text">
+                    </div>
+                    <!-- Profile picture -->
+                    <div class="form-group">
+                        <input class="form-control input-lg" placeholder="Profile picture url"
+                            formControlName="profilePicture" type="text">
+                    </div>
+                </fieldset>
+            </div>
+            <!-- /Col 1 -->
+            <!-- Checkboxes -->
+            <div class="row pt-4 text-center">
+                <i class="col-sm-12"> Technical skills </i>
+                <div class="col-sm-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="javascript" id="jsDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="jsDev">
+                            JavaScript
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="firebase" id="firebaseDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="firebaseDev">
+                            Firebase
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="cSharp" id="cDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="cDev">
+                            C#
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="java" id="javaDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="javaDev">
+                            Java
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="python" id="pythonDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="pythonDev">
+                            Python
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="php" id="phpDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="phpDev">
+                            PHP
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="wordpress" id="wordpressDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="wordpressDev">
+                            Wordpress
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="mySql" id="mySqlDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="mySqlDev">
+                            MySQL
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="reactJs" id="reactJsDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="reactJsDev">
+                            ReactJS
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="angular" id="angularDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="angularDev">
+                            Angular
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="vue" id="vueDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="vueDev">
+                            Vue
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="autoCAD" id="autoCad"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="autoCad">
+                            AutoCAD
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="nodeJs" id="nodeJsDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="nodeJsDev">
+                            NodeJS
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="reactNative" id="reactNativeDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="reactNativeDev">
+                            React Native
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="mongoDb" id="mongoDbDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="mongoDbDev">
+                            MongoDB
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="expressJs" id="expressJsDev"
+                            (change)="checkTechSkill($event)">
+                        <label class="form-check-label" for="expressJsDev">
+                            ExpressJS
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- /Checkboxes -->
+            <!-- Col 3 -->
+            <div class="col-md-4 mx-auto card-body">
+                <fieldset>
+                    <!-- Availability -->
+                    <div class="form-group has-error">
+                        <select class="form-control input-lg" formControlName="availability">
+                            <option disabled> Choose availability </option>
+                            <option value="available to start immediately"> Available to start immediately </option>
+                            <option value="available after 1 week"> Available after 1 week </option>
+                            <option value="available after 1 month"> Available after 1 month </option>
+                            <option value="not available before the end of the year"> Not available before the end of
+                                the year </option>
+                            <option value="not available"> Not available </option>
+                        </select>
+                    </div>
+                    <!-- Prefered way of communication -->
+                    <div class="form-group">
+                        <select class="form-control input-lg" formControlName="preferedWayOfCommunication">
+                            <option disabled> Prefered way of communication </option>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone</option>
+                            <option value="skype">Skype</option>
+                        </select>
+                    </div>
+                    <!-- English level -->
+                    <div class="form-group">
+                        <select class="form-control input-lg" formControlName="englishLevel">
+                            <option disabled>English level</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="C1">C1</option>
+                            <option value="C2">C2</option>
+                        </select>
+                    </div>
+                    <!-- Total projects -->
+                    <div class="form-group">
+                        <input class="form-control input-lg" placeholder="Total projects"
+                            formControlName="totalProjects" type="number" min="0">
+                    </div>
+                    <!-- Projects link -->
+                    <div class="form-group">
+                        <input class="form-control input-lg" placeholder="Projects link" formControlName="projectsLink"
+                            type="text">
+                    </div>
+                </fieldset>
+            </div>
+            <!-- /Col 3 -->
+            <!-- Technical skills and courses -->
+            <div class="col-md-12 mx-auto">
+                <div class="form-group">
+                    <h6 class="text-center"> More info about you </h6>
+                    <textarea class="form-control" rows="3" formControlName="moreInfo"></textarea>
+                </div>
+                <!-- Buttons -->
+                <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="editProfileForm.invalid">
+                    Edit </button>
+                <button class="btn btn-lg btn-danger btn-block" type="submit" routerLink="/user/profile"> Cancel
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

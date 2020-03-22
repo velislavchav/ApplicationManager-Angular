@@ -51,13 +51,14 @@
         <h6> Required skills: </h6>
         <span *ngFor="let requirment of currentJob.requiredSkills" class="text-muted text-capitalize"> {{ requirment }}
           <br></span>
-        <div class="mt-4">
-          <small class="text-secondary border-top "> created by {{ currentJob.authorName }} <br> </small>
-        </div>
         <!-- Advantages -->
         <div class="jobAdvant mt-4">
           <h6> Advantages </h6>
           <p> {{ currentJob.advantages }} </p>
+        </div>
+        <!-- AuthorName -->
+        <div class="mt-4">
+          <small class="text-secondary border-top "> created by {{ currentJob.authorName }} <br> </small>
         </div>
       </div>
       <!-- /col 2 -->

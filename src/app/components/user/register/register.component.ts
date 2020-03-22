@@ -23,9 +23,6 @@ export class RegisterComponent {
         password: ['', [Validators.required, Validators.minLength(4)]],
         repeatPassword: ['', [Validators.required, Validators.minLength(4)]],
       }, { validators: [passwordsMatch] }),
-      gender: ['Gender', [Validators.required]],
-      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      profilePicture: [''],
     })
   }
 
@@ -33,11 +30,6 @@ export class RegisterComponent {
     const username = this.registerForm.value.username;
     const email = this.registerForm.value.email;
     const password = this.registerForm.value.passwords.password;
-    const gender = this.registerForm.value.gender;
-    const phone = this.registerForm.value.phone;
-    const role = 'user';
-    let profilePicture = this.registerForm.value.profilePicture;
-    profilePicture === '' ? profilePicture = 'https://www.upv.edu.ph/images/2019/06/07/no-profile.png' : '';  
-    this.userService.signUp(username, email, password, gender, phone, profilePicture, role);
+    this.userService.signUp(username, email, password);
   }
 }
