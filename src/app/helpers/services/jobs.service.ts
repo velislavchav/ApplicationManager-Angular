@@ -37,7 +37,7 @@ export class JobsService {
 
     this.jobsCollection.add(newJob).then(() => {
       this.toastr.success("Successfully created job!", "Success");
-      this.router.navigate(['/jobs']);
+      this.router.navigate(['/home']);
     }).catch(err => {
       this.toastr.error(err, "Error");
     })

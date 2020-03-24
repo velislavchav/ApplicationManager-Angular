@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from 'src/app/helpers/services/user.service';
 import { Subscription } from 'rxjs';
 import { IUser } from 'src/app/helpers/interfaces/IUser';
+import { AuthService } from 'src/app/helpers/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,11 +14,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   currentUser: IUser;
   skillsSelectedByUser: Array<string> = [];
 
-  constructor(private userService: UserService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    const userId = this.userService.getUserId();
-    this.userSubscriber = this.userService.getUser(userId).subscribe(data => {
+    const userId = this.authService.getUserId();
+    this.userSubscriber = this.authService.getUser(userId).subscribe(data => {
       this.currentUser = data;
       for (const key in data.techSkills) {
         if (data.techSkills[key] === true) {

@@ -2,7 +2,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { CreateJobComponent } from './create-job/create-job.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { UserDataResolver } from 'src/app/helpers/resolvers/user-data.service';
 
@@ -32,15 +31,6 @@ const userRoutes: Routes = [
                     },
                 ]
             },
-            {
-                path: 'create',
-                children: [
-                    {
-                        path: 'job',
-                        component: CreateJobComponent,
-                    },
-                ]
-            }
         ]
     }
 ];

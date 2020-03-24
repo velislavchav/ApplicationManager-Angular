@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { UserService } from 'src/app/helpers/services/user.service';
 import { JobsService } from 'src/app/helpers/services/jobs.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/helpers/services/auth.service';
 
 @Component({
   selector: 'app-create-job',
@@ -31,7 +31,7 @@ export class CreateJobComponent implements OnDestroy {
     firebase: false,
   };
   
-  constructor(private fb: FormBuilder, private userService: UserService, private jobsService: JobsService) {
+  constructor(private fb: FormBuilder, private jobsService: JobsService, private authService: AuthService) {
     this.createJobForm = fb.group({
       jobPosition: ['', [Validators.required, Validators.minLength(4)]],
       salary: ['', [Validators.required, Validators.min(550)]],
@@ -55,9 +55,10 @@ export class CreateJobComponent implements OnDestroy {
     const degree = this.createJobForm.value.degree;
     const englishLevel = this.createJobForm.value.englishLevel;
     const advantages = this.createJobForm.value.advantages;
-    const authorId = this.userService.getUserId();
-    this.subscriber = this.userService.getUser(authorId).subscribe(data => {
-      const authorName = data.username;
+    const authorId = this.authService.getUserId();
+    
+    this.subscriber = this.authService.getUser(authorId).subscribe(data => {
+      const authorName = data.name;
       this.jobsService.createJob(this.selectedRequiredTechSkill, jobPosition, salary, jobCategory, degree, englishLevel, 
         advantages, authorId, authorName);
     })

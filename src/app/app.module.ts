@@ -26,6 +26,7 @@ import { ApplicationCardComponent } from './components/applications/application-
 // custom modules
 import { UserModule } from './components/user/user.module';
 import { JobsModule } from './components/jobs/jobs.module';
+import { EmployerModule } from './components/employer/employer.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { JobsModule } from './components/jobs/jobs.module';
   ],
   imports: [
     BrowserModule,
+    EmployerModule,
     UserModule,
     JobsModule,
     AppRoutingModule,

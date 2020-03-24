@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserService } from 'src/app/helpers/services/user.service';
+import { AuthService } from 'src/app/helpers/services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -10,21 +10,24 @@ import { UserService } from 'src/app/helpers/services/user.service';
 export class NavigationComponent implements OnInit, OnDestroy {
   subscriber: Subscription;
   isAuth: boolean;
+  userRole: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.subscriber = this.userService.isAuthChanged.subscribe((data) => {
+    this.subscriber = this.authService.isAuthChanged.subscribe(data => {
       this.isAuth = data;
+      data ? this.userRole = atob(this.authService.isAuth) : this.userRole = '';
     });
     
-    if (this.userService.isAuth) {
+    if (this.authService.isAuth) {
       this.isAuth = true;
-    }
+      this.userRole = atob(this.authService.isAuth);
+    } //make sure the data is correct after reload
   }
 
   logout() {
-    this.userService.logout().then(() => {
+    this.authService.logout().then(() => {
       this.isAuth = false;
     });
   }
