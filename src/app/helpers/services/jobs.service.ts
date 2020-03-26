@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { IJob } from '../interfaces/IJob';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from './user.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { AuthService } from './auth.service';
+import { IEmployer } from '../interfaces/IEmployer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
   jobsCollection: AngularFirestoreCollection<IJob>;
-  constructor(private firestore: AngularFirestore, private toastr: ToastrService, private userService: UserService, private router: Router) {
+  constructor(private firestore: AngularFirestore, private toastr: ToastrService, private router: Router, private authService: AuthService) {
     this.jobsCollection = this.firestore.collection('jobs');
   }
 
@@ -37,12 +38,34 @@ export class JobsService {
       createdAt,
     }
 
-    this.jobsCollection.add(newJob).then(() => {
-      this.toastr.success("Successfully created job!", "Success");
-      this.router.navigate(['/home']);
+    this.jobsCollection.add(newJob)
+    .then(firestoreData => {
+      newJob['id'] = firestoreData.id;
+      this.firestore.doc(`jobs/${firestoreData.id}`).set(newJob); // add again new job, because previous one doesnt have id
+      this.authService.getUser(authorId) // add the new job in employer
+        .pipe(take(1))
+        .toPromise().then(data => {
+          let employerData = data as IEmployer;
+          let newEmployerJobs = data.jobsPositions.slice();
+          newEmployerJobs.push(newJob);
+          employerData['jobsPositions'] = newEmployerJobs; // add job position object 
+          this.firestore.collection("users").doc(authorId).set(employerData);
+          this.toastr.success("Successfully created job!", "Success");
+          this.router.navigate(['/home']);
+        });
     }).catch(err => {
       this.toastr.error(err, "Error");
     })
+  }
+
+  loadJob(jobId: string) {
+    const userDocuments = this.firestore.doc<any>('jobs/' + jobId);
+    return userDocuments.snapshotChanges()
+      .pipe(
+        map(changes => {
+          const data = changes.payload.data() as IJob;
+          return { ...data };
+        }))
   }
 
   loadJobs() {
@@ -66,7 +89,7 @@ export class JobsService {
 
   getCreatedDate() {
     let today: any = new Date();
-    let dd : any = today.getDate();
+    let dd: any = today.getDate();
     let mm: any = today.getMonth() + 1;
     let yyyy = today.getFullYear();
     if (dd < 10) {
@@ -75,7 +98,7 @@ export class JobsService {
     if (mm < 10) {
       mm = '0' + mm;
     }
-  
+
     return today = dd + '/' + mm + '/' + yyyy;
   }
 
@@ -85,7 +108,7 @@ export class JobsService {
         return changes.map(job => {
           const data = job.payload.doc.data() as IJob;
           data.id = job.payload.doc.id;
-          if(data.authorId === userId) {
+          if (data.authorId === userId) {
             return data;
           }
         })

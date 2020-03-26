@@ -72,6 +72,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       username: this.userDataResolver.username,
       email: this.userDataResolver.email,
       applications: this.userDataResolver.applications,
+      applicationsId: this.userDataResolver.applicationsId,
       gender,
       phone,
       profilePicture,

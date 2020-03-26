@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IJob } from 'src/app/helpers/interfaces/IJob';
-import { Subscription } from 'rxjs';
 import { JobsService } from 'src/app/helpers/services/jobs.service';
 
 @Component({

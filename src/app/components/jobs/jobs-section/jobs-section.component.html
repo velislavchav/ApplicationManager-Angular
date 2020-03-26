@@ -19,7 +19,8 @@
         <td class="text-capitalize"> {{ job.degree }} </td>
         <td> {{ job.authorName }} </td>
         <td>
-          <button type="button" class="btn btn-success mr-2"> Apply for this job </button>
+          <button type="button" class="btn btn-success mr-2" (click)="sendApplication(job.id)" *ngIf="!job.isSubmitedAlready"> Apply for this job </button>
+          <button type="button" class="btn btn-danger mr-2" (click)="cancelApplication(job.id)" *ngIf="job.isSubmitedAlready"> Cancel applying </button>
           <button type="button" class="btn btn-warning ml-2" routerLink="/jobs/details/{{job.id}}"> See more info </button>
         </td>
       </tr>
