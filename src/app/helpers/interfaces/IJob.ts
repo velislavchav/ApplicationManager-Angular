@@ -9,4 +9,5 @@ export interface IJob {
     advantages?: string,
     authorId?: string,
     authorName?: string,
+    createdAt?: string;
 }

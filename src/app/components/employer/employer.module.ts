@@ -5,9 +5,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EmployerRoutingModule } from './employer-routing.module';
 import { CreateJobComponent } from './create-job/create-job.component';
 import { ProfileComponent } from './profile/profile.component';
+import { OwnedJobsComponent } from './profile/owned-jobs/owned-jobs.component';
+
+
 
 @NgModule({
-  declarations: [RegisterComponent, CreateJobComponent, ProfileComponent],
+  declarations: [RegisterComponent, CreateJobComponent, ProfileComponent, OwnedJobsComponent, ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -16,13 +16,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscriber = this.authService.isAuthChanged.subscribe(data => {
-      this.isAuth = data;
       data ? this.userRole = atob(this.authService.isAuth) : this.userRole = '';
+      this.isAuth = data;
     });
     
     if (this.authService.isAuth) {
-      this.isAuth = true;
       this.userRole = atob(this.authService.isAuth);
+      this.isAuth = true;
     } //make sure the data is correct after reload
   }
 

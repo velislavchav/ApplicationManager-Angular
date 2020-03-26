@@ -19,10 +19,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NotFoundComponent } from './components/core/not-found/not-found.component';
 
-//forms
-import { ApplicationsSectionComponent } from './components/applications/applications-section/applications-section.component';
-import { ApplicationCardComponent } from './components/applications/application-card/application-card.component';
-
 // custom modules
 import { UserModule } from './components/user/user.module';
 import { JobsModule } from './components/jobs/jobs.module';
@@ -35,8 +31,6 @@ import { EmployerModule } from './components/employer/employer.module';
     HomeComponent,
     // LoaderComponent,
     NotFoundComponent,
-    ApplicationsSectionComponent,
-    ApplicationCardComponent,
   ],
   imports: [
     BrowserModule,

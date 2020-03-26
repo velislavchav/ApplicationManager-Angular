@@ -11,10 +11,13 @@ import { JobsService } from 'src/app/helpers/services/jobs.service';
 })
 export class JobDetailsComponent implements OnInit {
   currentJob: IJob;
+  userRole: string;
   constructor(private route: ActivatedRoute, private jobsService: JobsService) { }
 
   ngOnInit(): void {
     const jobId = this.route.snapshot.params['id'];
+    this.userRole = this.route.snapshot.data.usrData['role'];    
+
     this.jobsService.loadJobDetails(jobId).then(job => {
       this.currentJob = job;
     });

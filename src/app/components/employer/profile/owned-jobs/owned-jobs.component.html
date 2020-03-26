@@ -1,0 +1,24 @@
+<div class="container my-4">
+    <h6 class="text-center my-3 text-uppercase" *ngIf="jobs.length > 0"> Owned jobs positions </h6>
+    <h6 class="text-center my-3 text-uppercase" *ngIf="jobs.length == 0"> There are not posted jobs positions yet </h6>
+    <div class="container">
+        <div class="card-columns">
+            <div class="card border" *ngFor="let job of jobs">
+                <a routerLink="/jobs/details/{{job.id}}">
+                    <img class="card-img-top"
+                        src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize"> • {{ job.jobPosition }} • </h5>
+                        <p class="card-text descript">
+                            {{ job.advantages }}
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted"> created {{ job.createdAt }}
+                            </small></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

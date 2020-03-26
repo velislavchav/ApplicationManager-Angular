@@ -43,6 +43,7 @@ export class EmployerService {
       logo: employer.logo,
       moreInfo: employer.moreInfo,
       applicationsSubmitted: [],
+      jobsPositions: [],
     };
     userRef.set(data);
   }

@@ -10,22 +10,19 @@
         <!-- <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li> -->
-        <li class="nav-item" *ngIf="userRole === 'user'">
-            <a class="nav-link" routerLink="/applications"> My applications </a>
-        </li>
-        <li class="nav-item"  *ngIf="userRole === 'user'">
+        <li class="nav-item"  *ngIf="isAuth && userRole === 'user'">
             <a class="nav-link" routerLink="/jobs"> Available jobs </a>
         </li>
-        <li class="nav-item"  *ngIf="userRole === 'employer'">
+        <li class="nav-item"  *ngIf="isAuth && userRole === 'employer'">
             <a class="nav-link" routerLink="employer/create/job"> Create job </a>
         </li>
         <!-- <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
         </li>  -->
-        <li class="nav-item" *ngIf="userRole === 'user'">
+        <li class="nav-item" *ngIf="isAuth && userRole === 'user'">
             <a class="nav-link" routerLink="user/profile" > Profile </a>
         </li>
-        <li class="nav-item" *ngIf="userRole === 'employer'">
+        <li class="nav-item" *ngIf="isAuth && userRole === 'employer'">
             <a class="nav-link" routerLink="employer/profile" > Profile </a>
         </li>
         <li class="nav-item" *ngIf="!isAuth">

@@ -7,4 +7,5 @@ export interface IEmployer {
     moreInfo: string;
     role?: string;
     applicationsSubmitted?: Array<Object>
+    jobsPositions?: Array<Object>
 }
