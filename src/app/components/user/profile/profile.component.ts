@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from 'src/app/helpers/services/user.service';
 import { Subscription } from 'rxjs';
 import { IUser } from 'src/app/helpers/interfaces/IUser';
 import { AuthService } from 'src/app/helpers/services/auth.service';
@@ -26,6 +25,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       }
     })
+  }
+
+  isEmptyObject(obj): boolean {
+    return Object.keys(obj).length > 0 ? false : true;
   }
 
   ngOnDestroy() {

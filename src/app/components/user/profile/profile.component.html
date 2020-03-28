@@ -3,10 +3,6 @@
         <div class="col-md-4">
             <div class="profile-img">
                 <img src="{{currentUser.profilePicture}}" alt="profile picture" />
-                <div class="file btn btn-lg btn-primary">
-                    Change Photo
-                    <input type="file" name="file" />
-                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -132,7 +128,7 @@
                             <label>Applications submitted</label>
                         </div>
                         <div class="col-md-6">
-                            <p> {{ currentUser.applications.length }} </p>
+                            <p> {{ currentUser.applicationsId.length }} </p>
                         </div>
                     </div>
                     <div class="row">
@@ -151,14 +147,16 @@
         <!-- Skills -->
         <div class="col-md-4 text-center text-capitalize">
             <ul class="mt-5 profile-skills">
-                <h6 class="pt-2 text-center text-uppercase"> SKILLS </h6>
+                <h6 class="pt-2 text-center text-uppercase" *ngIf="!isEmptyObject(skillsSelectedByUser)"> SKILLS </h6>
+                <h6 class="pt-2 text-center text-uppercase" *ngIf="isEmptyObject(skillsSelectedByUser)"> NO SKILLS YET </h6>
                 <li *ngFor="let skill of skillsSelectedByUser" ><span> {{ skill === "cSharp" ? "C#" : skill }} </span></li>
             </ul>
         </div>
         <!-- More info content -->
         <div class="col-md-8 text-center">
             <h6 class="text-center text-uppercase mt-5"> More info </h6>
-            <p class="text-justify"> {{ currentUser.moreInfo === "" ? "-".repeat(150) : currentUser.moreInfo }} </p>
+            <p class="text-justify" *ngIf="currentUser.moreInfo"> {{ currentUser.moreInfo }} </p>
+            <p class="text-center" *ngIf="!currentUser.moreInfo"> No more info yet </p>
         </div>
     </div>
 </div>

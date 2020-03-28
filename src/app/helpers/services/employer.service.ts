@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IEmployer } from '../interfaces/IEmployer';
 import { AuthService } from './auth.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,19 @@ export class EmployerService {
       jobsPositions: [],
     };
     userRef.set(data);
+  }
+
+  updateLogo(logoUrl: string) {
+    const employerId = this.authService.getUserId();
+    this.authService.getUser(employerId) // update the employer
+      .pipe(take(1))
+      .toPromise().then(data => {
+        let employerData = data as IEmployer;
+        employerData.logo = logoUrl;
+        this.firestore.collection("users").doc(employerId).set(employerData);
+        this.toastr.success('Successfully updated logo', 'Success');
+      }).catch(err => {
+        this.toastr.error(err, 'Error');
+      });
   }
 }

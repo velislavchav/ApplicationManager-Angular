@@ -1,0 +1,29 @@
+ <!-- Modal -->
+ <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog"
+ aria-labelledby="modalCenterTitle" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title text-center" id="modalLongTitle"> Change logo </h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       <!-- Change logo input -->
+       <div class="input-group input-group-sm mb-3">
+         <div class="input-group-prepend">
+           <span class="input-group-text text-uppercase" id="inputGroup-sizing-sm"> Logo url </span>
+         </div>
+         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" #newLogo>
+       </div>
+       <!-- /logo input -->
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn> Close </button>
+       <button type="button" class="btn btn-primary" (click)="changeLogo(newLogo, closeBtn)"> Save changes </button>
+     </div>
+   </div>
+ </div>
+</div>
+<!-- /Modal  -->

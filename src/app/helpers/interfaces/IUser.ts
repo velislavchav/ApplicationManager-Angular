@@ -16,4 +16,5 @@ export interface IUser {
     moreInfo: string;
     techSkills?: Object;
     applications?: Array<string>;
+    applicationsId?: Array<string>;
 }

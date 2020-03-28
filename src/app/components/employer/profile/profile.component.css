@@ -1,4 +1,20 @@
-.img-max {
+.profile-img {
+  text-align: center;
+}
+
+.profile-img img {
   max-width: 500px;
   width: 100%;
+}
+
+.profile-img .change-photo {
+  position: relative;
+  overflow: hidden;
+  margin-top: 3%;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+  opacity: 0.8;
 }

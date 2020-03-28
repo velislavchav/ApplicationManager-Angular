@@ -15,7 +15,7 @@
     width: 70%;
     height: 100%;
 }
-.profile-img .file {
+/* .profile-img .file {
     position: relative;
     overflow: hidden;
     margin-top: -20%;
@@ -30,7 +30,7 @@
     opacity: 0;
     right: 0;
     top: 0;
-}
+} */
 .profile-head h5{
     color: #333;
 }
