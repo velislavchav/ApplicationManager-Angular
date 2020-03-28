@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { take } from 'rxjs/operators';
 import { IJob } from '../interfaces/IJob';
+import { IEmployer } from '../interfaces/IEmployer';
 
 @Injectable({
   providedIn: 'root'
@@ -88,56 +89,83 @@ export class UserService {
     });
   }
 
-  addUserApplications(application: IJob) {
-    const userId = this.authService.getUserId();
-    this.authService.getUser(userId) // add the new application in user
-      .pipe(take(1))
-      .toPromise().then(data => {
-        let userData = data as IUser;
-        let newUserApplicationsId = data.applicationsId.slice();
-        newUserApplicationsId.push(application.id);
-        userData['applicationsId'] = newUserApplicationsId; // add application id 
-
-        let newUserApplications = data.applications.slice();
-        newUserApplications.push(application);
-        userData['applications'] = newUserApplications; // add application object
-
-        this.firestore.collection("users").doc(userId).set(userData);
-        this.toastr.success('Successfully sent application', 'Success');
-      }).catch(err => {
-        this.toastr.error(err, 'Error');
-      });
+  addApplication(job: IJob, user: IUser) {
+    this.authService.getUser(job.authorId).pipe(take(1)).toPromise().then(employer => {
+      this.addApplicationInUser(job, user);
+      this.addApplicationInEmployer(job, user, employer);
+      this.toastr.success('Successfully sent application', 'Success');
+    }).catch(err => {
+      this.toastr.error(err, 'Error');
+    });
   }
 
-  deleteUserApplications(application: IJob) {
-    const userId = this.authService.getUserId();
-    this.authService.getUser(userId) // delete the old application in user
-      .pipe(take(1))
-      .toPromise().then(data => {
-        let userData = data as IUser;
+  private addApplicationInUser(application: IJob, userData: IUser) {
+    let user = JSON.parse(JSON.stringify(userData)); // clone the props
+    let newUserApplicationsId = user.applicationsId.slice();
+    newUserApplicationsId.push(application.id);
+    userData['applicationsId'] = newUserApplicationsId; // add application id 
 
-        // delete the application id 
-        let newUserApplicationsId = data.applicationsId.slice();
-        const appIdIndex = newUserApplicationsId.findIndex(x => x === application.id);
-        if (appIdIndex >= 0) {
-          newUserApplicationsId.splice(appIdIndex, 1)
-          userData['applicationsId'] = newUserApplicationsId;
-        }
+    let newUserApplications = user.applications.slice();
+    newUserApplications.push(application);
+    userData['applications'] = newUserApplications; // add application object
 
-        // delete the application 
-        let newUserApplications = data.applications.slice();
-        const appIndex = newUserApplications.findIndex(x => x.id === application.id);
-        if (appIdIndex >= 0) {
-          newUserApplications.splice(appIndex, 1);
-          userData['applications'] = newUserApplications;
-        }
-
-        this.firestore.collection("users").doc(userId).set(userData);
-        this.toastr.success('Successfully canceled application', 'Success');
-      }).catch(err => {
-        this.toastr.error(err, 'Error');
-      });
+    this.firestore.collection("users").doc(user.uid).set(userData); //push the new user data
   }
+
+  private addApplicationInEmployer(jobApplication: IJob, user: IUser, employer: IEmployer) {
+    let employerData = JSON.parse(JSON.stringify(employer)); // clone the props
+    let employerApplications = employer.applicationsSubmitted.slice();
+    const employerSubmittedApplications = {
+      jobInfo: jobApplication,
+      senderInfo: user,
+    }
+
+    employerApplications.push(employerSubmittedApplications);
+    employerData['applicationsSubmitted'] = employerApplications; // add application in employer
+    this.firestore.collection("users").doc(employerData.eid).set(employerData);;
+  }
+
+  removeApplication(job: IJob, user: IUser) {
+    this.authService.getUser(job.authorId).pipe(take(1)).toPromise().then(employer => {
+      this.removeApplicationInUser(job, user);
+      this.removeApplicationInEmployer(job, user, employer);
+      this.toastr.success('Successfully canceled application', 'Success');
+    }).catch(err => {
+      this.toastr.error(err, 'Error');
+    });
+  }
+
+  private removeApplicationInUser(job: IJob, user: IUser) {
+    let userData = JSON.parse(JSON.stringify(user)); // clone the props
+    let newUserApplicationsId = userData.applicationsId.slice();
+    const appIdIndex = newUserApplicationsId.findIndex(x => x === job.id);
+    if (appIdIndex >= 0) {
+      newUserApplicationsId.splice(appIdIndex, 1)
+      userData['applicationsId'] = newUserApplicationsId;
+    }
+
+    // delete the application 
+    let newUserApplications = userData.applications.slice();
+    const appIndex = newUserApplications.findIndex(x => x.id === job.id);
+    if (appIdIndex >= 0) {
+      newUserApplications.splice(appIndex, 1);
+      userData['applications'] = newUserApplications;
+    }
+
+    this.firestore.collection("users").doc(userData.uid).set(userData);
+  }
+
+  private removeApplicationInEmployer(job: IJob, user: IUser, employer: IEmployer) {
+    let employerData = JSON.parse(JSON.stringify(employer)); // clone the props
+    let employerApplications = employerData.applicationsSubmitted.slice();
+    const jobIndex = employerApplications.findIndex(arrEl => arrEl.jobInfo.id === job.id);
+    if (jobIndex >= 0) {
+      employerApplications.splice(jobIndex, 1); // remove the application
+      employerData['applicationsSubmitted'] = employerApplications; //
+      this.firestore.collection("users").doc(employerData.eid).set(employerData);;
+    }
+  }
+
 
   isUserApplicationExist(applications: Array<IJob>, neededApplicationId: string) {
     let isExist = false;

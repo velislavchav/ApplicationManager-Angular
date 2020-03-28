@@ -1,3 +1,5 @@
+import { IJob } from './IJob';
+
 export interface IUser {
     uid?: string;
     username?: string;
@@ -15,6 +17,6 @@ export interface IUser {
     projectsLink: string;
     moreInfo: string;
     techSkills?: Object;
-    applications?: Array<string>;
+    applications?: Array<IJob>;
     applicationsId?: Array<string>;
 }

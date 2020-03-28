@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { JobsService } from 'src/app/helpers/services/jobs.service';
 import { IJob } from 'src/app/helpers/interfaces/IJob';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { UserService } from 'src/app/helpers/services/user.service';
 import { AuthService } from 'src/app/helpers/services/auth.service';
 import { IUser } from 'src/app/helpers/interfaces/IUser';
+import { IEmployer } from 'src/app/helpers/interfaces/IEmployer';
 
 @Component({
   selector: 'app-jobs-section',
@@ -17,12 +19,15 @@ export class JobsSectionComponent implements OnInit, OnDestroy {
   jobsSubscription: Subscription;
   jobSubscription: Subscription;
   userSubscription: Subscription;
+  currentUser: IUser;
 
-  constructor(public route: ActivatedRoute, private jobsService: JobsService, private userService: UserService, private authService: AuthService) { }
+  constructor(public route: ActivatedRoute, private jobsService: JobsService, private userService: UserService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     const userId = this.authService.getUserId();
     this.userSubscription = this.authService.getUser(userId).subscribe(usr => {
+      this.currentUser = usr;
       this.jobsSubscription = this.jobsService.loadJobs().subscribe(jobs => {
         for (const job of jobs) {
           const check = usr.applicationsId.find(el => el === job.id);
@@ -38,14 +43,16 @@ export class JobsSectionComponent implements OnInit, OnDestroy {
   }
 
   sendApplication(jobId: string) {
-    this.jobSubscription = this.jobsService.loadJob(jobId).subscribe(job => {
-      this.userService.addUserApplications(job);
-    });
+    this.jobSubscription = this.jobsService.loadJob(jobId)
+      .pipe(take(1)).subscribe(jobApplication => {
+        this.userService.addApplication(jobApplication, this.currentUser);
+      });
   }
 
   cancelApplication(jobId: string) {
-    this.jobSubscription = this.jobsService.loadJob(jobId).subscribe(job => {
-      this.userService.deleteUserApplications(job);
+    this.jobSubscription = this.jobsService.loadJob(jobId)
+    .pipe(take(1)).subscribe(jobApplication => {
+      this.userService.removeApplication(jobApplication, this.currentUser);
     });
   }
 
