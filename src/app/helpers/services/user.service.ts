@@ -129,7 +129,7 @@ export class UserService {
     this.authService.getUser(job.authorId).pipe(take(1)).toPromise().then(employer => {
       this.removeApplicationInUser(job, user);
       this.removeApplicationInEmployer(job, user, employer);
-      this.toastr.success('Successfully canceled application', 'Success');
+      this.toastr.info('Successfully canceled application', 'Success');
     }).catch(err => {
       this.toastr.error(err, 'Error');
     });

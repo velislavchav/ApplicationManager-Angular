@@ -1,13 +1,27 @@
-<div class="card text-center mt-5" *ngIf="currentJob">
-  <div class="card-header text-capitalize font-weight-bold">
-    {{ currentJob.jobPosition }}
+<div class="card text-center mt-5" *ngIf="currentJob && currentUser">
+  <div class="card-header text-capitalize font-weight-bold d-flex justify-content-between align-items-center">
+    <div class="col-md-3">
+      <button routerLink="/jobs" class="btn btn-warning" *ngIf="currentUser.role === 'user'"> Back to all jobs
+      </button>
+      <button routerLink="/employer/profile" class="btn btn-warning" *ngIf="currentUser.role === 'employer'">
+        Back to profile </button>
+    </div>
+    <span class="col-md-6 text-center text-muted"> {{ currentJob.jobPosition }} </span>
+    <div class="col-md-3">
+      <div *ngIf="currentUser.role === 'user'">
+        <button class="btn btn-success col-sm-4" *ngIf="!isSubmittedAlready" (click)="sendApplication()"> Apply </button>
+        <button class="btn btn-danger col-sm-4" *ngIf="isSubmittedAlready" (click)="cancelApplication()"> Cancel applying
+        </button>
+      </div>
+      <button class="btn btn-primary col-sm-4" *ngIf="currentUser.role === 'employer'"> Delete job </button>
+    </div>
   </div>
   <div class="card-body">
     <p class="card-text" *ngIf="currentJob.advantages"> {{ currentJob.advantages }} </p>
     <div class="row border-top border-bottom">
       <!-- col 1 -->
       <div class="col-md-7 pt-4">
-        <div class="tableReq mt-4">
+        <div class="tableReq">
           <table class="table">
             <thead class="thead-light">
               <tr>
@@ -42,7 +56,7 @@
       <!-- /col 1 -->
       <!-- col 2 -->
       <div class="col-md-5 text-center py-4">
-        <div class="tableReq mt-4">
+        <div class="tableReq">
           <table class="table">
             <thead class="thead-light">
               <tr>
@@ -62,8 +76,6 @@
       <!-- /col 2 -->
     </div>
   </div>
-  <div class="card-footer text-muted">
-    <button routerLink="/jobs" class="btn btn-primary col-sm-4" *ngIf="userRole === 'user'"> Back to all jobs </button>
-    <button routerLink="/employer/profile" class="btn btn-primary col-sm-4" *ngIf="userRole === 'employer'"> Back to profile </button>
+  <div class="card-footer">
   </div>
 </div>

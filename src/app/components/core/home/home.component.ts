@@ -8,10 +8,11 @@ import { AuthService } from 'src/app/helpers/services/auth.service';
 })
 export class HomeComponent implements OnInit {
   isAuthenticated: boolean;
+  role: string;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.isAuthenticated = !!this.authService.isAuth;
+    this.role = atob(this.authService.isAuth);
   }
-
 }

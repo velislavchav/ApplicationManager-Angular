@@ -21,7 +21,7 @@ export class JobsSectionComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   currentUser: IUser;
 
-  constructor(public route: ActivatedRoute, private jobsService: JobsService, private userService: UserService,
+  constructor(private route: ActivatedRoute, private jobsService: JobsService, private userService: UserService,
     private authService: AuthService) { }
 
   ngOnInit(): void {

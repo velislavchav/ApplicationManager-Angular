@@ -1,23 +1,49 @@
-<div class="jumbotron text-center">
-  <h2 class="card-title h2"> Application manager </h2>
-  <p class="blue-text my-4 font-weight-bold"> To see the whole functionality, you should sign up and sign in. </p>
-  <div class="row d-flex justify-content-center">
-    <div class="col-xl-7 pb-2">
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga aliquid dolorem ea distinctio
-        exercitationem delectus qui, quas eum architecto, amet quasi accusantium, fugit consequatur ducimus obcaecati
-        numquam molestias hic itaque accusantium doloremque laudantium, totam rem aperiam. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Fuga aliquid dolorem ea distinctio
-        exercitationem delectus qui, quas eum architecto, amet quasi accusantium, fugit consequatur ducimus obcaecati
-        numquam molestias hic itaque accusantium doloremque laudantium, totam rem aperiam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga aliquid dolorem ea distinctio
-        exercitationem delectus qui, quas eum architecto, amet quasi accusantium, fugit consequatur ducimus obcaecati
-        numquam molestias hic itaque accusantium doloremque laudantium, totam rem aperiam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga aliquid dolorem ea distinctio
-        exercitationem delectus qui, quas eum architecto, amet quasi accusantium, fugit consequatur ducimus obcaecati
-        numquam molestias hic itaque accusantium doloremque laudantium, totam rem aperiam.</p>
+<div class="body"></div>
+<div class="container my-5 py-5" *ngIf="!isAuthenticated">
+  <div class="card border-0 shadow">
+    <div class="card-body p-5">
+      <h1 class="font-weight-bold text-center title-color"> Application manager </h1>
+      <p class="lead mt-5"> It's a simple site, which helps employers in finding employees. For that reason, you should
+        <i routerLink="/user/register"> register a user/employee </i> or maybe you are the
+        one that is hiring people,
+        so <i routerLink="/employer/register">register as employer</i>. </p>
+        <p class="lead">If you already have account - <i routerLink="/user/login"> sign in </i>!</p>
+      <p class="lead">Nice to meet you!</p>
+      <div style="height: 17vh"></div>
+      <p class="lead mb-0 float-right small"> &copy; 2020 Velislav Chavdarov</p>
     </div>
   </div>
-  <hr class="my-4">
-  <div class="row">
-    <button type="button" routerLink="/user/register" class="btn btn-primary mr-2 col-md" *ngIf="!isAuthenticated"> Register </button>
-    <button type="button" routerLink="/user/login" class="btn btn-primary ml-2 col-md" *ngIf="!isAuthenticated"> Login </button>
+</div>
+
+<div class="container my-5 py-5" *ngIf="isAuthenticated && (role === 'user')">
+  <div class="card border-0 shadow">
+    <div class="card-body p-5">
+      <h1 class="font-weight-bold text-center title-color"> Application manager </h1>
+      <p class="lead mt-5"> Welcome to our site, which helps employers in finding employees. You are
+        already logged as <span> user/employee</span>.</p>
+      <p class="lead"> Make sure to add more data at your profile section, because it's important for employers to know
+        what is your level. </p>
+      <p class="lead">After that, feel free to apply for interesting job positions which can be found at 
+        <i  routerLink='/jobs'> available jobs section</i>. </p>
+      <p class="lead"> Have a nice day and keep an eye for employer's response for submitted applications! </p>
+      <div style="height: 17vh"></div>
+      <p class="lead mb-0 float-right small"> &copy; 2020 Velislav Chavdarov</p>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5 py-5" *ngIf="isAuthenticated && (role === 'employer')">
+  <div class="card border-0 shadow">
+    <div class="card-body p-5">
+      <h1 class="font-weight-bold text-center title-color"> Application manager </h1>
+      <p class="lead mt-5"> Welcome to our site, which helps employers in finding employees. You are
+        already logged as <span> employer</span>.</p>
+      <p class="lead">Make sure to add logo (if you did not add it before) at your <i routerLink='/employer/profile'> profile section</i>, 
+        because it's important for employee to see you keep an eye in the small details. </p>
+      <p class="lead"> Create jobs positions, which can be found by users and wait for their applications. </p>
+      <p class="lead"> Have a nice day and keep an eye for submitted applications! </p>
+      <div style="height: 17vh"></div>
+      <p class="lead mb-0 float-right small"> &copy; 2020 Velislav Chavdarov</p>
+    </div>
   </div>
 </div>

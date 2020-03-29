@@ -1,7 +1,26 @@
-.navbar-nav a:hover  {
-    border-bottom: 1px solid white;
-    /* border-top: 1px solid white; */
+.navbar {
+    color: #f19306;
+    background: rgb(47, 46, 46);
+    background: -moz-linear-gradient(90deg, rgba(47, 46, 46, 1) 0%, rgba(34, 34, 32, 1) 21%, rgba(34, 34, 32, 1) 86%, rgba(41, 39, 38, 1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(47, 46, 46, 1) 0%, rgba(34, 34, 32, 1) 21%, rgba(34, 34, 32, 1) 86%, rgba(41, 39, 38, 1) 100%);
+    background: linear-gradient(90deg, rgba(47, 46, 46, 1) 0%, rgba(34, 34, 32, 1) 21%, rgba(34, 34, 32, 1) 86%, rgba(41, 39, 38, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2f2e2e", endColorstr="#292726", GradientType=1);
 }
+
+.navbar-nav a:hover {
+    color: #f26d21;
+    border-bottom: 1px solid #f26d21;
+    /* border-top: 1px solid #f26d21; */
+}
+
+.navbar-brand {
+    background: rgb(214,141,44);
+    background: -webkit-linear-gradient(90deg, rgba(242,109,33,1) 0%, rgba(253,167,29,1) 50%, rgba(242,252,69,1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 
 a {
     cursor: pointer;
