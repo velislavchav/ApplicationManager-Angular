@@ -7,41 +7,39 @@
         </button>
     </div>
     <ul class="navbar-nav mr-auto">
-        <!-- <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li> -->
         <li class="nav-item" *ngIf="isAuth && userRole === 'user'">
-            <a class="nav-link" routerLink="/jobs"> Available jobs </a>
+            <a class="nav-link" routerLink="/jobs"><img class="mr-1" src="../../../../assets/icons/user/job.png"
+                    alt="ico" /> Available jobs </a>
         </li>
         <li class="nav-item" *ngIf="isAuth && userRole === 'employer'">
-            <a class="nav-link" routerLink="employer/create/job"> Create job </a>
+            <a class="nav-link" routerLink="employer/create/job"><img class="mr-1"
+                    src="../../../../assets/icons/employer/create-job.png" alt="ico" /> Create job </a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-        </li>  -->
         <li class="nav-item" *ngIf="isAuth && userRole === 'user'">
-            <a class="nav-link" routerLink="user/profile"> Profile </a>
+            <a class="nav-link" routerLink="user/profile"><img class="mr-1" src="../../../../assets/icons/profile.png"
+                    alt="ico" /> Profile </a>
         </li>
         <li class="nav-item" *ngIf="isAuth && userRole === 'employer'">
-            <a class="nav-link" routerLink="employer/profile"> Profile </a>
+            <a class="nav-link" routerLink="employer/profile"><img class="mr-1"
+                    src="../../../../assets/icons/profile.png" alt="ico" /> Profile </a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="!isAuth">
+            <a class="nav-link dropdown-toggle" href="user/register" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"><img class="mr-1" src="../../../../assets/icons/register.png">Register</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" routerLink="/user/register"><img class="mr-1"
+                        src="../../../../assets/icons/user/register.png" alt="ico" /> as User</a>
+                <a class="dropdown-item" routerLink="/employer/register"><img class="mr-1"
+                        src="../../../../assets/icons/employer/register.png" alt="ico" /> as Employer</a>
+            </div>
         </li>
         <li class="nav-item" *ngIf="!isAuth">
-            <a class="nav-link" routerLink="/user/register">Register</a>
-        </li>
-        <li class="nav-item" *ngIf="!isAuth">
-            <a class="nav-link" routerLink="/user/login">Login</a>
+            <a class="nav-link" routerLink="/user/login"><img class="mr-1" src="../../../../assets/icons/login.png"
+                    alt="ico" />Login</a>
         </li>
         <li class="nav-item" *ngIf="isAuth">
-            <a class="nav-link" (click)="logout()"> Logout </a>
+            <a class="nav-link" (click)="logout()"><img class="mr-1" src="../../../../assets/icons/logout.png"
+                    alt="ico" /> Logout </a>
         </li>
-        <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li> -->
     </ul>
 </nav>

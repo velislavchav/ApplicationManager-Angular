@@ -17,13 +17,12 @@
     /* background: url('https://wallpapershome.com/images/wallpapers/iceland-5120x2880-4k-5k-wallpaper-mountains-river-clouds-6295.jpg') no-repeat center center fixed;  */
     /* background: url('https://wallpapersmug.com/download/5120x2880/38d8ee/dubai-buildings-cityscape-night-8k.jpg') no-repeat center center fixed;  */
     /* background: url('https://www.elsetge.cat/myimg/f/2-26438_starry-landscape-5k-wallpaper-skierfe.jpg') no-repeat center center fixed;  */
-    /* background: url('') no-repeat center center fixed;  */
     position: absolute;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    height: 92.5vh;
+    height: 100vh;
     min-width: 100%;
 }
 

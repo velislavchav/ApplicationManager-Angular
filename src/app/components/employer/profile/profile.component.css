@@ -1,3 +1,8 @@
+.container {
+  background-color: rgba(255,255,255, 0.85);
+  border-radius: 15px;
+}
+
 .profile-img {
   text-align: center;
 }
@@ -16,5 +21,4 @@
   border-radius: 0;
   font-size: 15px;
   background: #212529b8;
-  opacity: 0.8;
 }

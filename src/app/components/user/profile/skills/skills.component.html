@@ -1,0 +1,8 @@
+<!-- Skills -->
+<ul class="mt-5 profile-skills" *ngIf="skillsSelectedByUser">
+    <h6 class="pt-2 text-center text-uppercase" *ngIf="!isEmptyObject(skillsSelectedByUser)"> SKILLS </h6>
+    <h6 class="pt-2 text-center text-uppercase" *ngIf="isEmptyObject(skillsSelectedByUser)"> NO SKILLS YET
+    </h6>
+    <li *ngFor="let skill of skillsSelectedByUser"><span> {{ skill === "cSharp" ? "C#" : skill }} </span>
+    </li>
+</ul>

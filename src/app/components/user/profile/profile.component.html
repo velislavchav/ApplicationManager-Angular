@@ -10,11 +10,7 @@
                 <h5>
                     {{ currentUser.username }}
                 </h5>
-                <h6>
-                    {{ currentUser.profession === "Select profession" ?  "" : currentUser.profession }}
-                </h6>
-                <p class="proile-rating">ROLE : <span> {{ currentUser.role }} </span></p>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                             aria-controls="home" aria-selected="true">About</a>
@@ -38,6 +34,12 @@
                 <p class="text-uppercase"> User's projects </p>
                 <a href="{{currentUser.projectsLink}}">
                     {{ currentUser.projectsLink === "" ?  "not added yet" : currentUser.projectsLink}} </a><br />
+                <!-- User's profession -->
+                <p class="text-uppercase"> Profession </p>
+                {{ currentUser.profession === "Select profession" ?  "" : currentUser.profession }} <br />
+                <!-- User's role -->
+                <p class="text-uppercase"> Role </p>
+                {{ currentUser.role }} <br />
             </div>
         </div>
         <div class="col-md-8">
@@ -144,19 +146,11 @@
         </div>
     </div>
     <div class="row mt-5 border-top">
-        <!-- Skills -->
         <div class="col-md-4 text-center text-capitalize">
-            <ul class="mt-5 profile-skills">
-                <h6 class="pt-2 text-center text-uppercase" *ngIf="!isEmptyObject(skillsSelectedByUser)"> SKILLS </h6>
-                <h6 class="pt-2 text-center text-uppercase" *ngIf="isEmptyObject(skillsSelectedByUser)"> NO SKILLS YET </h6>
-                <li *ngFor="let skill of skillsSelectedByUser" ><span> {{ skill === "cSharp" ? "C#" : skill }} </span></li>
-            </ul>
+            <app-skills [skillsSelectedByUser]="skillsSelectedByUser"></app-skills>
         </div>
-        <!-- More info content -->
         <div class="col-md-8 text-center">
-            <h6 class="text-center text-uppercase mt-5"> More info </h6>
-            <p class="text-justify" *ngIf="currentUser.moreInfo"> {{ currentUser.moreInfo }} </p>
-            <p class="text-center" *ngIf="!currentUser.moreInfo"> No more info yet </p>
+            <app-more-info [moreInfo]="currentUser.moreInfo"></app-more-info>
         </div>
     </div>
 </div>

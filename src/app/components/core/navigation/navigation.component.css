@@ -21,7 +21,10 @@
     -webkit-text-fill-color: transparent;
 }
 
-
 a {
     cursor: pointer;
+}
+
+img {
+    height: 23px;
 }

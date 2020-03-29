@@ -8,4 +8,5 @@ body::-webkit-scrollbar {
 
 body {
     -ms-overflow-style: none;
+    background: url('https://i.pinimg.com/originals/4d/9d/3f/4d9d3f0f71a32bdd3d19d0b572bab2c1.jpg') no-repeat center center fixed;
 }

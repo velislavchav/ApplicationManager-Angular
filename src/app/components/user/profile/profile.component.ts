@@ -27,10 +27,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     })
   }
 
-  isEmptyObject(obj): boolean {
-    return Object.keys(obj).length > 0 ? false : true;
-  }
-
   ngOnDestroy() {
     this.userSubscriber ? this.userSubscriber.unsubscribe() : '';
   }

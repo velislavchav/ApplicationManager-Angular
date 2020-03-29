@@ -9,8 +9,10 @@
     <span class="col-md-6 text-center text-muted"> {{ currentJob.jobPosition }} </span>
     <div class="col-md-3">
       <div *ngIf="currentUser.role === 'user'">
-        <button class="btn btn-success col-sm-4" *ngIf="!isSubmittedAlready" (click)="sendApplication()"> Apply </button>
-        <button class="btn btn-danger col-sm-4" *ngIf="isSubmittedAlready" (click)="cancelApplication()"> Cancel applying
+        <button class="btn btn-success col-sm-4" *ngIf="!isSubmittedAlready" (click)="sendApplication()"> Apply
+        </button>
+        <button class="btn btn-danger col-sm-4" *ngIf="isSubmittedAlready" (click)="cancelApplication()"> Cancel
+          applying
         </button>
       </div>
       <button class="btn btn-primary col-sm-4" *ngIf="currentUser.role === 'employer'"> Delete job </button>
@@ -23,7 +25,7 @@
       <div class="col-md-7 pt-4">
         <div class="tableReq">
           <table class="table">
-            <thead class="thead-light">
+            <thead class="thead-dark">
               <tr>
                 <th scope="col" colspan="2" class="text-uppercase"> More information </th>
               </tr>
@@ -58,7 +60,7 @@
       <div class="col-md-5 text-center py-4">
         <div class="tableReq">
           <table class="table">
-            <thead class="thead-light">
+            <thead class="thead-dark">
               <tr>
                 <th scope="col" colspan="2" class="text-uppercase"> Required technologies </th>
               </tr>
