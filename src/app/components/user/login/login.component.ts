@@ -23,4 +23,8 @@ export class LoginComponent {
     const password = this.loginForm.value.password;
     this.authService.signIn(email, password);
   }
+
+  get f(): any {
+    return this.loginForm.controls;
+  }
 }

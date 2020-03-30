@@ -1,52 +1,104 @@
-<div class="container-fluid py-5">
+<div class="container-fluid py-5" *ngIf="registerForm">
     <div class="row">
         <div class="col-md-6 mx-auto">
             <form (ngSubmit)="tryRegisterAsEmployer()" [formGroup]="registerForm">
                 <div class="card card-body bg-light">
-                    <h3 class="text-center mb-4"> {{ currentUrlSegment === 'employer' ? 'Sign-up as employer' : 'Sign-up as user'}} </h3>
+                    <h3 class="text-center mb-4">
+                        {{ currentUrlSegment === 'employer' ? 'Register as employer' : 'Register as user'}} </h3>
                     <!-- Nav tab bar -->
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/user/register"><img src="../../../../assets/icons/user/register.png" alt="ico"/> As user </a>
+                            <a class="nav-link" routerLink="/user/register"><img
+                                    src="../../../../assets/icons/user/register.png" alt="ico" /> As user </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" [class.active]="currentUrlSegment === 'employer'" routerLink="/employer/register/"><img src="../../../../assets/icons/employer/register.png" alt="ico"/> As employer </a>
+                            <a class="nav-link" [class.active]="currentUrlSegment === 'employer'"
+                                routerLink="/employer/register/"><img
+                                    src="../../../../assets/icons/employer/register.png" alt="ico" /> As employer </a>
                         </li>
                     </ul>
                     <!-- /nav tab -->
                     <fieldset class="mt-4">
+                        <!-- name -->
                         <div class="form-group has-error">
                             <input class="form-control input-lg" placeholder="Employer name" formControlName="name"
                                 type="text">
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.name.errors?.required && f.name.touched">
+                                <strong>Warning!</strong> Name is required.
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.name.errors?.minlength && f.name.touched">
+                                <strong>Warning!</strong> Name minimum length is 3 characters.
+                            </div>
                         </div>
+                        <!-- email -->
                         <div class="form-group has-error">
                             <input class="form-control input-lg" placeholder="E-mail Address" formControlName="email"
                                 type="text">
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.email.errors?.required && f.email.touched">
+                                <strong>Warning!</strong> Email is required.
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.email.errors?.pattern && f.email.touched">
+                                <strong>Warning!</strong> Email is not valid.
+                            </div>
                         </div>
+                        <!-- passwords -->
                         <div formGroupName="passwords">
+                            <!-- password -->
                             <div class="form-group has-success">
                                 <input class="form-control input-lg" placeholder="Password" formControlName="password"
                                     type="password">
+                                <div class="alert alert-danger alert-dismissible fade show errs"
+                                    *ngIf="f.passwords.controls.password.errors?.minlength && f.passwords.controls.password.touched">
+                                    <strong>Warning!</strong> Passwords min length is 4 chars.
+                                </div>
                             </div>
+                            <!-- repeat password -->
                             <div class="form-group has-success">
                                 <input class="form-control input-lg" placeholder="Confirm Password"
                                     formControlName="repeatPassword" type="password">
+                                <div class="alert alert-danger alert-dismissible fade show errs"
+                                    *ngIf="f.passwords.errors?.passwordsMatch && f.passwords.touched">
+                                    <strong>Warning!</strong> Passwords are not matched.
+                                </div>
                             </div>
                         </div>
+                        <!-- phone -->
                         <div class="form-group has-error">
                             <input class="form-control input-lg" placeholder="Phone number" formControlName="phone"
                                 type="text">
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.phone.errors?.required && f.phone.touched">
+                                <strong>Warning!</strong> Phone is required.
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="(f.phone.errors?.minlength || f.phone.errors?.maxlength) && f.phone.touched">
+                                <strong>Warning!</strong> Phone should be 10 characters.
+                            </div>
                         </div>
+                        <!-- logo -->
                         <div class="form-group has-error">
                             <input class="form-control input-lg" placeholder="Employer logo url" formControlName="logo"
                                 type="text">
                         </div>
+                        <!-- more info -->
                         <div class="form-group">
                             <h6 class="text-center"> More info about the company </h6>
                             <textarea class="form-control" rows="3" formControlName="moreInfo"></textarea>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.moreInfo.errors?.required && f.moreInfo.touched">
+                                <strong>Warning!</strong> Info is required.
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.moreInfo.errors?.minlength && f.moreInfo.touched">
+                                <strong>Warning!</strong> Info should be at least 25 characters.
+                            </div>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit"
-                            [disabled]="false"> Sign Me Up </button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" 
+                        [disabled]="registerForm.invalid"> Register as employer </button>
                     </fieldset>
                 </div>
             </form>

@@ -33,12 +33,12 @@ export class CreateJobComponent implements OnDestroy {
   
   constructor(private fb: FormBuilder, private jobsService: JobsService, private authService: AuthService) {
     this.createJobForm = fb.group({
-      jobPosition: ['', [Validators.required, Validators.minLength(4)]],
-      salary: ['', [Validators.required, Validators.min(550)]],
+      jobPosition: ['', [Validators.required, Validators.minLength(5)]],
+      salary: ['', [Validators.required, Validators.min(700)]],
       jobCategory: ['Job category', [Validators.required]],
       degree: ['Needed education degree', [Validators.required]],
       englishLevel: ['English level', [Validators.required]],
-      advantages: ['']
+      advantages: ['', [Validators.required, Validators.minLength(25)]]
     })
   }
 
@@ -51,9 +51,12 @@ export class CreateJobComponent implements OnDestroy {
   submitJob() {
     const jobPosition = this.createJobForm.value.jobPosition;
     const salary = +this.createJobForm.value.salary;
-    const jobCategory = this.createJobForm.value.jobCategory;
-    const degree = this.createJobForm.value.degree;
-    const englishLevel = this.createJobForm.value.englishLevel;
+    let jobCategory = this.createJobForm.value.jobCategory;
+    jobCategory === 'Job category' ? jobCategory = 'empty' : '';
+    let degree = this.createJobForm.value.degree;
+    degree === 'Needed education degree' ? degree = 'empty' : '';
+    let englishLevel = this.createJobForm.value.englishLevel;
+    englishLevel === 'English level' ? englishLevel = 'empty' : '';
     const advantages = this.createJobForm.value.advantages;
     const authorId = this.authService.getUserId();
     
@@ -62,6 +65,10 @@ export class CreateJobComponent implements OnDestroy {
       this.jobsService.createJob(this.selectedRequiredTechSkill, jobPosition, salary, jobCategory, degree, englishLevel, 
         advantages, authorId, authorName);
     })
+  }
+
+  get f(): any {
+    return this.createJobForm.controls;
   }
 
   ngOnDestroy() {

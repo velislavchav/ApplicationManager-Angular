@@ -2,17 +2,36 @@
     <div class="row">
         <div class="col-md-6 mx-auto">
             <form (ngSubmit)="submitJob()" [formGroup]="createJobForm">
-                <div class="card card-body bg-light">
+                <div class="card card-body">
                     <h3 class="text-center mb-4">Create job offer</h3>
                     <fieldset>
+                        <!-- job position -->
                         <div class="form-group has-error">
-                            <input class="form-control input-lg" placeholder="Job position" formControlName="jobPosition"
-                                type="text">
+                            <input class="form-control input-lg" placeholder="Job position"
+                                formControlName="jobPosition" type="text">
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.jobPosition.errors?.required && f.jobPosition.touched">
+                                <strong>Warning!</strong> Job position is required.
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.jobPosition.errors?.minLength && f.jobPosition.touched">
+                                <strong>Warning!</strong> Job position require minimum 5 characters.
+                            </div>
                         </div>
+                        <!-- salary -->
                         <div class="form-group has-error">
                             <input class="form-control input-lg" placeholder="Salary" formControlName="salary"
                                 type="number">
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.salary.errors?.required && f.salary.touched">
+                                <strong>Warning!</strong> Salary is required.
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.salary.errors?.min && f.salary.touched">
+                                <strong>Warning!</strong> Salary should be min 700 euro.
+                            </div>
                         </div>
+                        <!-- job category -->
                         <div class="form-group">
                             <select class="form-control input-lg" formControlName="jobCategory">
                                 <option disabled> Job category </option>
@@ -23,7 +42,12 @@
                                 <option value="technical support"> Technical Support </option>
                                 <option value="QA"> Quality assurance </option>
                             </select>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.jobCategory.touched && f.jobCategory.value === 'Job category'">
+                                <strong>Warning!</strong> Job category is required.
+                            </div>
                         </div>
+                        <!-- degree -->
                         <div class="form-group">
                             <select class="form-control input-lg" formControlName="degree">
                                 <option disabled>Needed education degree</option>
@@ -32,7 +56,12 @@
                                 <option value="master"> Master's degree </option>
                                 <option value="doctoral"> Doctoral degree </option>
                             </select>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.degree.touched && f.degree.value === 'Needed education degree'">
+                                <strong>Warning!</strong> Education degree is required.
+                            </div>
                         </div>
+                        <!-- english level -->
                         <div class="form-group">
                             <select class="form-control input-lg" formControlName="englishLevel">
                                 <option disabled>English level</option>
@@ -43,6 +72,10 @@
                                 <option value="C1">C1</option>
                                 <option value="C2">C2</option>
                             </select>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.englishLevel.touched && f.englishLevel.value === 'English level'">
+                                <strong>Warning!</strong> English level is required.
+                            </div>
                         </div>
                         <!-- Checkboxes -->
                         <h6 class="text-center"> Required technical skills </h6>
@@ -50,25 +83,29 @@
                             <!-- Col 1 -->
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="javascript" id="jsDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="javascript" id="jsDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="jsDev">
                                         JavaScript
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="java" id="javaDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="java" id="javaDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="javaDev">
                                         Java
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="python" id="pythonDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="python" id="pythonDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="pythonDev">
                                         Python
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="php" id="phpDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="php" id="phpDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="phpDev">
                                         PHP
                                     </label>
@@ -84,31 +121,36 @@
                             <!-- Col 2 -->
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="wordpress" id="wordpressDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="wordpress" id="wordpressDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="wordpressDev">
                                         Wordpress
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="mySql" id="mySqlDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="mySql" id="mySqlDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="mySqlDev">
                                         MySQL
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="mongoDb" id="mongoDbDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="mongoDb" id="mongoDbDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="mongoDbDev">
                                         MongoDB
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="expressJs" id="expressJsDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="expressJs" id="expressJsDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="expressJsDev">
                                         ExpressJS
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="c#" id="cDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="c#" id="cDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="cDev">
                                         C#
                                     </label>
@@ -120,36 +162,41 @@
                                         Firebase
                                     </label>
                                 </div>
-                                
+
                             </div>
                             <!-- Col 3 -->
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="reactJs" id="reactJsDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="reactJs" id="reactJsDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="reactJsDev">
                                         ReactJS
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="angular" id="angularDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="angular" id="angularDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="angularDev">
                                         Angular
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="vue" id="vueDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="vue" id="vueDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="vueDev">
                                         Vue
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="nodeJs" id="nodeJsDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="nodeJs" id="nodeJsDev"
+                                        (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="nodeJsDev">
                                         NodeJS
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="reactNative" id="reactNativeDev" (change)="getRequiredTechSkill($event)">
+                                    <input class="form-check-input" type="checkbox" value="reactNative"
+                                        id="reactNativeDev" (change)="getRequiredTechSkill($event)">
                                     <label class="form-check-label" for="reactNativeDev">
                                         React Native
                                     </label>
@@ -157,14 +204,24 @@
                             </div>
                         </div>
                         <!-- /Checkboxes -->
+                        <!-- description -->
                         <div class="form-group mt-2">
-                            <h6 class="text-center"> Advantages (if there any) </h6>
+                            <h6 class="text-center"> Description </h6>
                             <textarea class="form-control" rows="3" formControlName="advantages"></textarea>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.advantages.errors?.required && f.advantages.touched">
+                                <strong>Warning!</strong> Description is required.
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs"
+                                *ngIf="f.advantages.errors?.minlength && f.advantages.touched">
+                                <strong>Warning!</strong> Description should be at least 25 characters.
+                            </div>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="createJobForm.invalid"> Create job </button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit"
+                            [disabled]="createJobForm.invalid"> Create job </button>
                     </fieldset>
                 </div>
             </form>
         </div>
     </div>
-</div> 
+</div>

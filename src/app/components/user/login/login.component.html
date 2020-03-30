@@ -4,15 +4,29 @@
             <form (ngSubmit)="tryLogin()" [formGroup]="loginForm">
                 <div class="card card-body bg-light">
                     <h3 class="text-center mb-4">Sign-in</h3>
+                    <!-- email -->
                     <div class="form-group has-error">
                         <input class="form-control input-lg" placeholder="E-mail" formControlName="email" type="text">
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.email.errors?.required && f.email.touched">
+                            <strong>Warning!</strong> Email is required.
+                        </div>
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.email.errors?.pattern && f.email.touched">
+                            <strong>Warning!</strong> Email is not valid.
+                        </div>
                     </div>
+                    <!-- password -->
                     <div class="form-group has-success">
                         <input class="form-control input-lg" placeholder="Password" formControlName="password"
                             type="password">
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.password.errors?.minlength && f.password.touched">
+                            <strong>Warning!</strong> Password min length is 4 chars.
+                        </div>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit"
-                        [disabled]="loginForm.invalid">Sign Me In</button>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="loginForm.invalid">Sign
+                        me In</button>
                 </div>
             </form>
         </div>
