@@ -6,13 +6,15 @@ import { Router } from '@angular/router';
 import { map, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { IEmployer } from '../interfaces/IEmployer';
+import { IUser } from '../interfaces/IUser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
   jobsCollection: AngularFirestoreCollection<IJob>;
-  constructor(private firestore: AngularFirestore, private toastr: ToastrService, private router: Router, private authService: AuthService) {
+  constructor(private firestore: AngularFirestore, private toastr: ToastrService, private router: Router,
+    private authService: AuthService) {
     this.jobsCollection = this.firestore.collection('jobs');
   }
 
@@ -39,23 +41,23 @@ export class JobsService {
     }
 
     this.jobsCollection.add(newJob)
-    .then(firestoreData => {
-      newJob['id'] = firestoreData.id;
-      this.firestore.doc(`jobs/${firestoreData.id}`).set(newJob); // add again new job, because previous one doesnt have id
-      this.authService.getUser(authorId) // add the new job in employer
-        .pipe(take(1))
-        .toPromise().then(data => {
-          let employerData = data as IEmployer;
-          let newEmployerJobs = data.jobsPositions.slice();
-          newEmployerJobs.push(newJob);
-          employerData['jobsPositions'] = newEmployerJobs; // add job position object 
-          this.firestore.collection("users").doc(authorId).set(employerData);
-          this.toastr.success("Successfully created job!", "Success");
-          this.router.navigate(['/home']);
-        });
-    }).catch(err => {
-      this.toastr.error(err, "Error");
-    })
+      .then(firestoreData => {
+        newJob['id'] = firestoreData.id;
+        this.firestore.doc(`jobs/${firestoreData.id}`).set(newJob); // add again new job, because previous one doesnt have id
+        this.authService.getUser(authorId) // add the new job in employer
+          .pipe(take(1))
+          .toPromise().then(data => {
+            let employerData = data as IEmployer;
+            let newEmployerJobs = data.jobsPositions.slice();
+            newEmployerJobs.push(newJob);
+            employerData['jobsPositions'] = newEmployerJobs; // add job position object 
+            this.firestore.collection("users").doc(authorId).set(employerData);
+            this.toastr.success("Successfully created job!", "Success");
+            this.router.navigate(['/home']);
+          });
+      }).catch(err => {
+        this.toastr.error(err, "Error");
+      })
   }
 
   loadJob(jobId: string) {
@@ -115,4 +117,89 @@ export class JobsService {
       }),
     )
   }
+
+  deleteJob(job: IJob) {
+    this.firestore.collection('jobs').doc(job.id).delete().then(() => {
+      this.deleteEmployerJobInfo(job);
+      this.deleteUserApplication(job);
+      this.toastr.success('Successfully deleted job', 'Success');
+      this.router.navigate(['/employer/profile']);
+    }).catch(err => {
+      this.toastr.success(err, 'Error');
+      this.router.navigate(['/home']);
+    });
+  }
+
+  private deleteEmployerJobInfo(job: IJob) {
+    let employer: IEmployer;
+    this.authService.getUser(job.authorId).pipe(take(1)).toPromise()
+      .then(usr => employer = usr as IEmployer)
+      .then(() => {
+        let employerApplicationsSubmitted = JSON.parse(JSON.stringify(employer['applicationsSubmitted']));
+        for (const index in employerApplicationsSubmitted) {
+          if (JSON.stringify(employerApplicationsSubmitted[+index]['jobInfo']) === JSON.stringify(job)) {
+            let newAppsSubmitted = employer.applicationsSubmitted.slice();
+            newAppsSubmitted.splice(+index, 1);
+            employer.applicationsSubmitted = newAppsSubmitted;
+          }
+        }
+      })
+      .then(() => {
+        let employerJobs = JSON.parse(JSON.stringify(employer['jobsPositions']));
+        for (const index in employerJobs) {
+          if (JSON.stringify(employerJobs[+index]) === JSON.stringify(job)) {
+            let newJobs = employer.jobsPositions.slice();
+            newJobs.splice(+index, 1);
+            employer.jobsPositions = newJobs;
+          }
+        }
+      })
+      .then(() => {
+        this.firestore.collection("users").doc(job.authorId).set(employer); //push the new user data
+      }).catch(err => {
+        this.toastr.error(err, 'Error')
+      });
+  }
+
+  private deleteUserApplication(job: IJob) {
+    this.firestore.collection("users").snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          if (a.payload.doc.data()['role'] === 'user') {
+            const data = a.payload.doc.data() as Object;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          }
+        });
+      })
+    ).subscribe(querySnapshot => {
+      let user: IUser;
+      try {
+        querySnapshot.forEach(usrInfo => {
+          if (usrInfo !== undefined) {
+            user = JSON.parse(JSON.stringify(usrInfo));
+            let usrApplicationsId = usrInfo['applicationsId'].slice();
+            let usrApplications = usrInfo['applications'].slice();
+            const applicationIdIndex = usrApplicationsId.indexOf(job['id']);
+            let applicationIndex = -1;
+            for (const index in usrApplications) {
+              if (JSON.stringify(usrApplications[+index]) === JSON.stringify(job)) {
+                applicationIndex = +index;
+              }
+            }
+            applicationIdIndex >= 0 ? usrApplicationsId.splice(applicationIdIndex, 1) : '';
+            applicationIndex >= 0 ? usrApplications.splice(applicationIndex, 1) : '';
+            user['applicationsId'] = usrApplicationsId;
+            user['applications'] = usrApplications;
+            this.firestore.collection("users").doc(user.uid).set(user); //push the new user data
+          }
+        });
+      } catch (err) {
+        this.toastr.error(err, 'Error');
+      }
+    });
+  }
+
+
+
 }

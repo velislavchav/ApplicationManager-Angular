@@ -22,8 +22,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.jobsSubscriber = this.jobsService.loadOwnedJobs(this.employerId).subscribe(data => {
-      this.ownedJobs = data;
       this.employerSubscriber = this.authService.getUser(this.employerId).subscribe(usrData => {
+        this.ownedJobs = data;
         this.currentEmployer = usrData;
       })
     });

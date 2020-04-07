@@ -52,6 +52,10 @@ export class JobDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
+  deleteJob(job: IJob) {
+    this.jobsService.deleteJob(job);
+  }
+
   ngOnDestroy(): void {
     this.userSubscription ? this.userSubscription.unsubscribe() : '';
     this.jobSubscription ? this.jobSubscription.unsubscribe() : '';

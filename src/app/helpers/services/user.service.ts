@@ -122,7 +122,7 @@ export class UserService {
 
     employerApplications.push(employerSubmittedApplications);
     employerData['applicationsSubmitted'] = employerApplications; // add application in employer
-    this.firestore.collection("users").doc(employerData.eid).set(employerData);;
+    this.firestore.collection("users").doc(employerData.eid).set(employerData);
   }
 
   removeApplication(job: IJob, user: IUser) {
