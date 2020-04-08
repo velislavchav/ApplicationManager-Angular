@@ -7,7 +7,6 @@ import { take } from 'rxjs/operators';
 import { UserService } from 'src/app/helpers/services/user.service';
 import { AuthService } from 'src/app/helpers/services/auth.service';
 import { IUser } from 'src/app/helpers/interfaces/IUser';
-import { IEmployer } from 'src/app/helpers/interfaces/IEmployer';
 
 @Component({
   selector: 'app-jobs-section',
@@ -40,6 +39,7 @@ export class JobsSectionComponent implements OnInit, OnDestroy {
         this.jobs = jobs;
       })
     })
+    
   }
 
   sendApplication(jobId: string) {
