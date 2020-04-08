@@ -199,7 +199,4 @@ export class JobsService {
       }
     });
   }
-
-
-
 }
