@@ -129,8 +129,8 @@ export class UserService {
       profilePicture: user.profilePicture,
       techSkills: user.techSkills,
       projectsLink: user.projectsLink,
-      totalProjects: user.totalProjects
-
+      totalProjects: user.totalProjects,
+      username: user.username,
     }
     const employerSubmittedApplications = {
       jobInfo: jobApplication,
@@ -144,15 +144,14 @@ export class UserService {
 
   removeApplication(job: IJob, user: IUser) {
     let notificationMessage = 'Success';
-    atob(localStorage.getItem('usrrole')) === 'employer' ?
-      notificationMessage = 'Successfully rejected application' :
-      notificationMessage = 'Successfully canceled application'
+    let role = atob(localStorage.getItem('usrrole'));
+    role === 'employer' ? notificationMessage = 'Successfully rejected application' : notificationMessage = 'Successfully canceled application'
 
     this.authService.getUser(job.authorId).pipe(take(1)).toPromise().then(employer => {
       this.removeApplicationInUser(job, user);
       this.removeApplicationInEmployer(job, user, employer);
       this.toastr.success(notificationMessage, 'Success');
-      this.router.navigate(['/home']);
+      role === 'employer' ? this.router.navigate(['/home']) : this.router.navigate(['/jobs']);
     }).catch(err => {
       this.toastr.error(err, 'Error');
     });

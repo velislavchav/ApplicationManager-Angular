@@ -1,9 +1,13 @@
-<div class="row mt-5 mx-auto" *ngIf="applications.length > 0">
-    <div class="col-md-3 mx-auto card" *ngFor="let app of applications">
+<div class="row mt-5" *ngIf="applications.length > 0 && !isLoading">
+    <div class="col-md-4 mx-auto card" *ngFor="let app of applications">
         <div class="card-body text-center">
-            <h5 class="card-title"> {{ app.jobInfo.jobPosition }} </h5>
-            <h6 class="card-subtitle mb-2 text-muted"> sent by {{ app.senderInfo.username }} </h6>
+            <h5 class="card-title"> {{ app.senderInfo.username }} </h5>
+            <h6 class="card-subtitle mb-2 text-muted"> as {{ app.jobInfo.jobPosition }} </h6>
             <p class="card-text">{{ app.jobInfo.advantages | shorten:80 }}</p>
+            <hr>
+            <p class="card-subtitle mb-2"> <i class="text-muted">email: </i> {{ app.senderInfo.email }} </p>
+            <p class="card-subtitle mb-2"> <i class="text-muted">phone: </i> {{ app.senderInfo.phone == "" ? "not added" : app.senderInfo.phone }} </p>
+            <hr>
             <button class="card-link btn btn-warning">User profile</button>
             <button class="card-link btn btn-success">Approve</button>
             <button class="card-link btn btn-danger" (click)="rejectApplication(app.jobInfo, app.senderInfo.uid)">Reject</button>
@@ -11,7 +15,7 @@
     </div>
 </div>
 
-<div id="notfound" *ngIf="applications.length == 0">
+<div id="notfound" *ngIf="applications.length == 0 && !isLoading">
     <div class="notfound">
         <h2>No applications yet!</h2>
     </div>

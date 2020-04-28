@@ -11,14 +11,17 @@ import { UserService } from 'src/app/helpers/services/user.service';
 })
 export class ApplicationsSubmittedComponent implements OnInit, OnDestroy {
   applications = [];
+  isLoading: boolean = true;
   subscription: Subscription;
   userSubscription: Subscription;
   constructor(private employerService: EmployerService, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     const userId = this.authService.getUserId();
     this.subscription = this.employerService.getApplications(userId).subscribe(data => {
       this.applications = data;
+      this.isLoading = false;
     });
   }
 

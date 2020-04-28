@@ -30,3 +30,7 @@
     text-transform: uppercase;
     margin: 0px;
 }
+
+.card {
+    max-width: 25%;
+}
