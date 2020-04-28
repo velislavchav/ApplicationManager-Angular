@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IEmployer } from '../interfaces/IEmployer';
 import { AuthService } from './auth.service';
-import { take, exhaust, exhaustMap, filter, map } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -68,5 +68,9 @@ export class EmployerService {
       const applications = usrData.applicationsSubmitted;
       return applications;
     }))
+  }
+
+  rejectApplication(rejectedApplication: Object) {
+    
   }
 }

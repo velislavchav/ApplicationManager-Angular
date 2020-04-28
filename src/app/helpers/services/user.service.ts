@@ -115,9 +115,26 @@ export class UserService {
   private addApplicationInEmployer(jobApplication: IJob, user: IUser, employer: IEmployer) {
     let employerData = JSON.parse(JSON.stringify(employer)); // clone the props
     let employerApplications = employer.applicationsSubmitted.slice();
+    let senderInfo = {
+      uid: user.uid,
+      availability: user.availability,
+      email:user.email,
+      englishLevel: user.englishLevel,
+      experience: user.experience,
+      gender: user.gender,
+      moreInfo: user.moreInfo,
+      phone: user.phone,
+      preferedWayOfCommunication: user.preferedWayOfCommunication,
+      profession: user.profession,
+      profilePicture: user.profilePicture,
+      techSkills: user.techSkills,
+      projectsLink: user.projectsLink,
+      totalProjects: user.totalProjects
+
+    }
     const employerSubmittedApplications = {
       jobInfo: jobApplication,
-      senderInfo: user,
+      senderInfo,
     }
 
     employerApplications.push(employerSubmittedApplications);
@@ -126,10 +143,16 @@ export class UserService {
   }
 
   removeApplication(job: IJob, user: IUser) {
+    let notificationMessage = 'Success';
+    atob(localStorage.getItem('usrrole')) === 'employer' ?
+      notificationMessage = 'Successfully rejected application' :
+      notificationMessage = 'Successfully canceled application'
+
     this.authService.getUser(job.authorId).pipe(take(1)).toPromise().then(employer => {
       this.removeApplicationInUser(job, user);
       this.removeApplicationInEmployer(job, user, employer);
-      this.toastr.info('Successfully canceled application', 'Success');
+      this.toastr.success(notificationMessage, 'Success');
+      this.router.navigate(['/home']);
     }).catch(err => {
       this.toastr.error(err, 'Error');
     });
@@ -158,7 +181,7 @@ export class UserService {
   private removeApplicationInEmployer(job: IJob, user: IUser, employer: IEmployer) {
     let employerData = JSON.parse(JSON.stringify(employer)); // clone the props
     let employerApplications = employerData.applicationsSubmitted.slice();
-    const jobIndex = employerApplications.findIndex(arrEl => arrEl.jobInfo.id === job.id);
+    const jobIndex = employerApplications.findIndex(arrEl => arrEl.jobInfo.id === job.id && arrEl.senderInfo.uid === user.uid);
     if (jobIndex >= 0) {
       employerApplications.splice(jobIndex, 1); // remove the application
       employerData['applicationsSubmitted'] = employerApplications; //

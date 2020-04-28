@@ -6,7 +6,13 @@
             <p class="card-text">{{ app.jobInfo.advantages | shorten:80 }}</p>
             <button class="card-link btn btn-warning">User profile</button>
             <button class="card-link btn btn-success">Approve</button>
-            <button class="card-link btn btn-danger">Reject</button>
+            <button class="card-link btn btn-danger" (click)="rejectApplication(app.jobInfo, app.senderInfo.uid)">Reject</button>
         </div>
     </div>
 </div>
+
+<div id="notfound" *ngIf="applications.length == 0">
+    <div class="notfound">
+        <h2>No applications yet!</h2>
+    </div>
+  </div>
