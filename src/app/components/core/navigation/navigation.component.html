@@ -15,6 +15,10 @@
             <a class="nav-link" routerLink="employer/create/job"><img class="mr-1"
                     src="../../../../assets/icons/employer/create-job.png" alt="ico" /> Create job </a>
         </li>
+        <li class="nav-item" *ngIf="isAuth && userRole === 'employer'">
+            <a class="nav-link" routerLink="employer/applications"><img class="mr-1"
+                    src="../../../../assets/icons/employer/applications.png" alt="ico" /> Applications submitted </a>
+        </li>
         <li class="nav-item" *ngIf="isAuth && userRole === 'user'">
             <a class="nav-link" routerLink="user/profile"><img class="mr-1" src="../../../../assets/icons/profile.png"
                     alt="ico" /> Profile </a>

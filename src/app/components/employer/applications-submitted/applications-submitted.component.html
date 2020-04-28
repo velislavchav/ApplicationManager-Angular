@@ -1,0 +1,12 @@
+<div class="row mt-5 mx-auto" *ngIf="applications.length > 0">
+    <div class="col-md-3 mx-auto card" *ngFor="let app of applications">
+        <div class="card-body text-center">
+            <h5 class="card-title"> {{ app.jobInfo.jobPosition }} </h5>
+            <h6 class="card-subtitle mb-2 text-muted"> sent by {{ app.senderInfo.username }} </h6>
+            <p class="card-text">{{ app.jobInfo.advantages | shorten:80 }}</p>
+            <button class="card-link btn btn-warning">User profile</button>
+            <button class="card-link btn btn-success">Approve</button>
+            <button class="card-link btn btn-danger">Reject</button>
+        </div>
+    </div>
+</div>

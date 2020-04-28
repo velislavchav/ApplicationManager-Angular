@@ -4,6 +4,7 @@ import { CreateJobComponent } from './create-job/create-job.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EmployerGuard } from 'src/app/helpers/guards/employer.guard';
 import { AuthGuard } from 'src/app/helpers/guards/auth.guard';
+import { ApplicationsSubmittedComponent } from './applications-submitted/applications-submitted.component';
 
 
 const employerRoutes: Routes = [
@@ -15,6 +16,10 @@ const employerRoutes: Routes = [
                 path: 'register',
                 canActivate: [AuthGuard],
                 component: RegisterComponent,
+            },
+            {
+                path: 'applications',
+                component: ApplicationsSubmittedComponent,
             },
             {
                 path: 'create/job',

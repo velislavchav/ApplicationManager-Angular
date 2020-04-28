@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IEmployer } from '../interfaces/IEmployer';
 import { AuthService } from './auth.service';
-import { take } from 'rxjs/operators';
+import { take, exhaust, exhaustMap, filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +61,12 @@ export class EmployerService {
       }).catch(err => {
         this.toastr.error(err, 'Error');
       });
+  }
+
+  getApplications(userId: string) {
+    return this.authService.getUser(userId).pipe(take(1), map(usrData => {
+      const applications = usrData.applicationsSubmitted;
+      return applications;
+    }))
   }
 }
