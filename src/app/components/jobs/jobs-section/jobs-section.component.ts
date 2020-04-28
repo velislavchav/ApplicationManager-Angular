@@ -15,6 +15,7 @@ import { IUser } from 'src/app/helpers/interfaces/IUser';
 })
 export class JobsSectionComponent implements OnInit, OnDestroy {
   jobs: Array<IJob> = [];
+  isLoading: boolean = true;
   jobsSubscription: Subscription;
   jobSubscription: Subscription;
   userSubscription: Subscription;
@@ -37,6 +38,7 @@ export class JobsSectionComponent implements OnInit, OnDestroy {
           }
         } // to check if user is applying for the jobs
         this.jobs = jobs;
+        this.isLoading = false;
       })
     })
     

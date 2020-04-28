@@ -1,11 +1,11 @@
-<div id="notfound" *ngIf="jobs.length == 0">
+<div id="notfound" *ngIf="jobs.length == 0 && !isLoading">
   <div class="notfound">
       <h2>No job positions yet!</h2>
   </div>
 </div>
 
 
-<table class="table table-striped table-bordered text-center my-3" *ngIf="jobs.length > 0">
+<table class="table table-striped table-bordered text-center my-3" *ngIf="jobs.length > 0 && !isLoading">
     <thead>
       <tr>
           <th scope="col"> Position </th>

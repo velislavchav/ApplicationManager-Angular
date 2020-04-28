@@ -4,9 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 // core components
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './components/shared/navigation/navigation.component';
-import { HomeComponent } from './components/shared/home/home.component';
-// import { LoaderComponent } from './components/core/loader/loader.component';
 
 // firebase
 import { environment } from "src/environments/environment";
@@ -17,20 +14,16 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 // toastr
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 
 // custom modules
 import { UserModule } from './components/user/user.module';
 import { JobsModule } from './components/jobs/jobs.module';
 import { EmployerModule } from './components/employer/employer.module';
+import { SharedModule } from './components/shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
-    HomeComponent,
-    // LoaderComponent,
-    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +41,7 @@ import { EmployerModule } from './components/employer/employer.module';
       preventDuplicates: true,
       progressBar: true,
     }),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
