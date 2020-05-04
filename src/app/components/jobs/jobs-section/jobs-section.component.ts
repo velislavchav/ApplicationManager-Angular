@@ -41,7 +41,6 @@ export class JobsSectionComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       })
     })
-    
   }
 
   sendApplication(jobId: string) {
@@ -53,9 +52,9 @@ export class JobsSectionComponent implements OnInit, OnDestroy {
 
   cancelApplication(jobId: string) {
     this.jobSubscription = this.jobsService.loadJob(jobId)
-    .pipe(take(1)).subscribe(jobApplication => {
-      this.userService.removeApplication(jobApplication, this.currentUser);
-    });
+      .pipe(take(1)).subscribe(jobApplication => {
+        this.userService.removeApplication(jobApplication, this.currentUser);
+      });
   }
 
   ngOnDestroy(): void {

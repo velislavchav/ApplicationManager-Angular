@@ -1,0 +1,72 @@
+<div class="modal fade" id="selectedUserInfoModal" tabindex="-1" role="dialog"
+    aria-labelledby="selectedUserInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="selectedUserInfoModalLabel"> User information </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table border text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" colspan="2" class="text-uppercase"> Profile info </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"> Name </th>
+                            <td> {{ user.username }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Email </th>
+                            <td> {{ user.email }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Phone </th>
+                            <td> {{ user.phone === '' ? 'not added' : user.phone }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Gender </th>
+                            <td> {{ user.gender === 'Choose gender' ? 'not selected' : user.gender }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Profession </th>
+                            <td> {{ user.profession === 'Select profession' ? 'not selected' : user.profession }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Availability </th>
+                            <td> {{ user.availability === 'Choose availability' ? 'not selected' : user.availability }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Experience </th>
+                            <td> {{ user.experience === 'Select experience' ? 'not selected' : user.experience }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> English Level </th>
+                            <td> {{ user.englishLevel === 'English level' ? 'not selected' : user.englishLevel }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Projects Link </th>
+                            <td> {{ user.projectsLink === '' ? 'not added' : user.projectsLink }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Tech skills </th>
+                            <td> {{ user.techSkills }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> More info </th>
+                            <td> {{ user.moreInfo === '' ? 'not added' : user.moreInfo  }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

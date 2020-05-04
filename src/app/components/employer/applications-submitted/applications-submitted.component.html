@@ -6,11 +6,13 @@
             <p class="card-text">{{ app.jobInfo.advantages | shorten:80 }}</p>
             <hr>
             <p class="card-subtitle mb-2"> <i class="text-muted">email: </i> {{ app.senderInfo.email }} </p>
-            <p class="card-subtitle mb-2"> <i class="text-muted">phone: </i> {{ app.senderInfo.phone == "" ? "not added" : app.senderInfo.phone }} </p>
+            <p class="card-subtitle mb-2"> <i class="text-muted">phone: </i>
+                {{ app.senderInfo.phone == "" ? "not added" : app.senderInfo.phone }} </p>
             <hr>
-            <button class="card-link btn btn-warning">User profile</button>
-            <button class="card-link btn btn-success">Approve</button>
-            <button class="card-link btn btn-danger" (click)="rejectApplication(app.jobInfo, app.senderInfo.uid)">Reject</button>
+            <button class="card-link btn btn-warning" data-toggle="modal" data-target="#selectedUserInfoModal"
+                (click)="viewUserProfile(app.senderInfo)"> User profile </button>
+            <button class="card-link btn btn-danger"
+                (click)="rejectApplication(app.jobInfo, app.senderInfo.uid)"> Reject </button>
         </div>
     </div>
 </div>
@@ -19,4 +21,6 @@
     <div class="notfound">
         <h2>No applications yet!</h2>
     </div>
-  </div>
+</div>
+
+<app-user-info [user]="userViewProfile" *ngIf="userViewProfile !== null"></app-user-info>

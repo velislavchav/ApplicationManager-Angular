@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     if (this.authService.isAuth) {
       this.userRole = atob(this.authService.isAuth);
       this.isAuth = true;
-    } //make sure the data is correct after reload
+    } // makes sure the data is correct after reload
   }
 
   logout() {

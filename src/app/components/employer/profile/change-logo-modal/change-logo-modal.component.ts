@@ -3,8 +3,7 @@ import { EmployerService } from 'src/app/helpers/services/employer.service';
 
 @Component({
   selector: 'app-change-logo-modal',
-  templateUrl: './change-logo-modal.component.html',
-  styleUrls: ['./change-logo-modal.component.css']
+  templateUrl: './change-logo-modal.component.html'
 })
 export class ChangeLogoModalComponent {
   constructor(private employerService: EmployerService) { }

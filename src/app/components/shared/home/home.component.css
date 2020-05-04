@@ -1,22 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif&display=swap');
+
 .body {
-    /* background: url('../../../../assets/landing.jpg') no-repeat center center fixed; */
-    /* background: url('https://wallpapercave.com/wp/wp5723757.jpg') no-repeat center center fixed; */
-    /* background: url('https://wallpaperaccess.com/full/754635.jpg') no-repeat center center fixed; */
-    /* background: url('https://i.pinimg.com/originals/40/ca/3b/40ca3b3f2ffcbf0d48f91eb9bd875821.png') no-repeat center center fixed; */
-    /* background: url('https://www.elsetge.cat/myimg/f/210-2101151_dark-web-backgrounds-wallpaper-blue-abstract-background-4k.png') no-repeat center center fixed; */
     background: url('https://i.pinimg.com/originals/4d/9d/3f/4d9d3f0f71a32bdd3d19d0b572bab2c1.jpg') no-repeat center center fixed;
-    /* background: url('https://wallpaperplay.com/walls/full/6/3/7/60336.jpg') no-repeat center center fixed; */
-    /* background: url('https://i.pinimg.com/originals/ae/77/1b/ae771b7e8140ed86eb38e966f0374a73.jpg') no-repeat center center fixed; */
-    /* background: url('https://i.pinimg.com/originals/de/1d/df/de1ddf9ee30e08e15460626b919ef87e.jpg') no-repeat center center fixed; */
-    /* background: url('https://external-preview.redd.it/NXaM31uCGigLDeBAPwnQaMQjQF8SQHFph3pEDbemTo8.jpg?auto=webp&s=0a76219b5ffc1d3d3bf69334fbef1b5f418bd384') no-repeat center center fixed; */
-    /* background: url('https://www.ecopetit.cat/wpic/mpic/34-343222_4k-wallpaper-reddit-best-cool-wallpaper-hd-download.jpg') no-repeat center center fixed; */
-    /* background: url('https://free4kwallpapers.com/uploads/originals/2020/02/27/catalina-with-galaxy-background-wallpaper.jpg') no-repeat center center fixed; */
-    /* background: url('https://wallpaperaccess.com/full/1388947.jpg') no-repeat center center fixed;  */
-    /* background: url('https://images4.alphacoders.com/953/953904.jpg') no-repeat center center fixed;  */
-    /* background: url('https://wallpapershome.com/images/wallpapers/iceland-5120x2880-4k-5k-wallpaper-mountains-river-clouds-6295.jpg') no-repeat center center fixed;  */
-    /* background: url('https://wallpapersmug.com/download/5120x2880/38d8ee/dubai-buildings-cityscape-night-8k.jpg') no-repeat center center fixed;  */
-    /* background: url('https://www.elsetge.cat/myimg/f/2-26438_starry-landscape-5k-wallpaper-skierfe.jpg') no-repeat center center fixed;  */
     position: absolute;
     -webkit-background-size: cover;
     -moz-background-size: cover;

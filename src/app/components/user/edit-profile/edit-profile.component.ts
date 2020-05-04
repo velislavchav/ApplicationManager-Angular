@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/helpers/services/user.service';
 import { Subscription } from 'rxjs';
-import { IUser } from 'src/app/helpers/interfaces/IUser';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
-export class EditProfileComponent implements OnInit, OnDestroy {
+export class EditProfileComponent {
   editProfileForm: FormGroup;
   newSelectedTechSkills: {} = {
     javascript: false,
@@ -47,10 +46,6 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       projectsLink: [this.userDataResolver.projectsLink],
       moreInfo: [this.userDataResolver.moreInfo],
     })
-  }
-
-  ngOnInit() {
-    
   }
 
   submitEditProfile() {
@@ -94,8 +89,5 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     const chboxValue = event.target.value;
     const chboxIsChecked = event.target.checked;
     this.newSelectedTechSkills[chboxValue] = chboxIsChecked;
-  }
-
-  ngOnDestroy() {
   }
 }

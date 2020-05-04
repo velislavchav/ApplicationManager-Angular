@@ -10,10 +10,11 @@ import { ChangeLogoModalComponent } from './profile/change-logo-modal/change-log
 import { MoreInfoComponent } from './profile/more-info/more-info.component';
 import { ApplicationsSubmittedComponent } from './applications-submitted/applications-submitted.component';
 import { CustomPipesModule } from 'src/app/helpers/pipes/custom-pipes.module';
+import { UserInfo } from './applications-submitted/user-info-modal/user-info.component';
 
 @NgModule({
   declarations: [RegisterComponent, CreateJobComponent, ProfileComponent, OwnedJobsComponent, 
-    ChangeLogoModalComponent, MoreInfoComponent, ApplicationsSubmittedComponent, ],
+    ChangeLogoModalComponent, MoreInfoComponent, ApplicationsSubmittedComponent, UserInfo ],
   imports: [
     CommonModule,
     CustomPipesModule,

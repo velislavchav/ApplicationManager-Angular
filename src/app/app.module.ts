@@ -17,6 +17,7 @@ import { JobsModule } from './components/jobs/jobs.module';
 import { EmployerModule } from './components/employer/employer.module';
 import { SharedModule } from './components/shared/shared.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
