@@ -10,7 +10,6 @@ import { ApplicationsSubmittedComponent } from './applications-submitted/applica
 const employerRoutes: Routes = [
     {
         path: 'employer',
-        canActivate: [EmployerGuard],
         children: [
             {
                 path: 'register',
